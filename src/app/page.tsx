@@ -356,7 +356,8 @@ export default function Page() {
                   </select>
                 </div>
               </div>
-              <div className="pt-3 flex items-center justify-between">
+              <div className="pt-3 flex items-center justify-between gap-3">
+                {/* Label + tooltip */}
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
                   Tantangan AI
                   <span className="group relative inline-flex">
@@ -368,15 +369,136 @@ export default function Page() {
                     </span>
                   </span>
                 </span>
-                <button
+
+                {/* ── Framer Motion Pill Toggle ── */}
+                <motion.button
                   onClick={() => setIsChallengeEnabled(!isChallengeEnabled)}
-                  className={`toggle-track ${isChallengeEnabled ? 'on' : 'off'}`}
                   role="switch"
                   aria-checked={isChallengeEnabled}
                   aria-label={isChallengeEnabled ? 'Nonaktifkan tantangan AI' : 'Aktifkan tantangan AI'}
+                  animate={{
+                    background: isChallengeEnabled
+                      ? 'linear-gradient(135deg, rgba(16,185,129,0.22) 0%, rgba(16,185,129,0.10) 100%)'
+                      : 'rgba(51,65,85,0.55)',
+                    borderColor: isChallengeEnabled
+                      ? 'rgba(16,185,129,0.55)'
+                      : 'rgba(148,163,184,0.22)',
+                    boxShadow: isChallengeEnabled
+                      ? '0 0 16px rgba(16,185,129,0.25), inset 0 1px 0 rgba(255,255,255,0.08)'
+                      : 'inset 0 1px 0 rgba(255,255,255,0.04)',
+                  }}
+                  whileTap={{ scale: 0.93 }}
+                  whileHover={{ scale: 1.04 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '7px',
+                    padding: '5px 11px 5px 7px',
+                    borderRadius: '999px',
+                    border: '1.5px solid transparent',
+                    cursor: 'pointer',
+                    flexShrink: 0,
+                    minHeight: '32px',
+                    whiteSpace: 'nowrap',
+                    outline: 'none',
+                  }}
                 >
-                  <div className={`toggle-ball ${isChallengeEnabled ? 'on' : 'off'}`} />
-                </button>
+                  {/* ── Animated Knob ── */}
+                  <motion.span
+                    animate={{
+                      background: isChallengeEnabled ? '#10b981' : '#475569',
+                      boxShadow: isChallengeEnabled
+                        ? '0 0 10px rgba(16,185,129,0.7), 0 0 20px rgba(16,185,129,0.3)'
+                        : '0 1px 3px rgba(0,0,0,0.3)',
+                      scale: isChallengeEnabled ? 1.05 : 1,
+                    }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 28 }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '22px',
+                      height: '22px',
+                      borderRadius: '50%',
+                      flexShrink: 0,
+                    }}
+                  >
+                    {/* ── Icon crossfade with AnimatePresence ── */}
+                    <AnimatePresence mode="wait" initial={false}>
+                      {isChallengeEnabled ? (
+                        <motion.span
+                          key="on-icon"
+                          initial={{ opacity: 0, rotate: -90, scale: 0.4 }}
+                          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                          exit={{ opacity: 0, rotate: 90, scale: 0.4 }}
+                          transition={{ duration: 0.18, ease: 'easeOut' }}
+                          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        >
+                          {/* sparkle / moon icon */}
+                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                          </svg>
+                        </motion.span>
+                      ) : (
+                        <motion.span
+                          key="off-icon"
+                          initial={{ opacity: 0, rotate: 90, scale: 0.4 }}
+                          animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                          exit={{ opacity: 0, rotate: -90, scale: 0.4 }}
+                          transition={{ duration: 0.18, ease: 'easeOut' }}
+                          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+                        >
+                          {/* x icon */}
+                          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                          </svg>
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </motion.span>
+
+                  {/* ── Animated Label ── */}
+                  <AnimatePresence mode="wait" initial={false}>
+                    {isChallengeEnabled ? (
+                      <motion.span
+                        key="label-on"
+                        initial={{ opacity: 0, y: 6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.15, ease: 'easeOut' }}
+                        style={{
+                          fontSize: '11px',
+                          fontWeight: 800,
+                          letterSpacing: '0.08em',
+                          textTransform: 'uppercase',
+                          color: '#10b981',
+                          lineHeight: 1,
+                        }}
+                      >
+                        ON
+                      </motion.span>
+                    ) : (
+                      <motion.span
+                        key="label-off"
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 6 }}
+                        transition={{ duration: 0.15, ease: 'easeOut' }}
+                        style={{
+                          fontSize: '11px',
+                          fontWeight: 700,
+                          letterSpacing: '0.08em',
+                          textTransform: 'uppercase',
+                          color: '#64748b',
+                          lineHeight: 1,
+                        }}
+                      >
+                        OFF
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </motion.button>
               </div>
             </div>
           </section>

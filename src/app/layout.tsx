@@ -49,11 +49,10 @@ export const metadata: Metadata = {
     description: 'Aplikasi roda keberuntungan kelas interaktif dengan AI-powered challenge menggunakan Google Gemini. Gratis untuk guru dan siswa SD, SMP, SMA.',
     images: [
       {
-        url: '/og-image.png',
+        url: '/opengraph-image',
         width: 1200,
         height: 630,
         alt: 'Roda Keberuntungan Kelas - Smart Classroom AI Edition',
-        type: 'image/png',
       },
     ],
   },
@@ -61,7 +60,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Roda Keberuntungan Kelas - Smart Classroom AI Edition',
     description: 'Aplikasi roda keberuntungan kelas interaktif dengan AI-powered challenge menggunakan Google Gemini.',
-    images: ['/og-image.png'],
+    images: ['/opengraph-image'],
     creator: '@hsmnandar',
   },
   robots: {
@@ -201,7 +200,7 @@ export default function RootLayout({
   return (
     <html lang="id">
       <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
         {/* theme-color is handled by viewport export above */}

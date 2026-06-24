@@ -700,9 +700,8 @@ html {
   }
 }
 
-/* ── Input / Select tap targets ── */
-input, select, textarea, button {
-  /* WCAG 2.5.5: minimum 44×44px tap target on touch devices */
+/* WCAG 2.5.5: minimum 44×44px tap target — exclude custom switches */
+input, select, textarea, button:not([role="switch"]) {
   min-height: 44px;
 }
 
@@ -714,23 +713,10 @@ input, select, textarea, button {
 
 /* ── Touch device: larger tap zones ── */
 @media (hover: none) and (pointer: coarse) {
-  button, a, [role="button"], [role="switch"] {
+  /* Exclude role=switch — those have their own sizing */
+  button:not([role="switch"]), a, [role="button"] {
     min-height: 44px;
     min-width: 44px;
-  }
-  
-  /* Bigger toggle on touch */
-  .toggle-track {
-    width: 52px;
-    height: 28px;
-  }
-  .toggle-ball {
-    width: 22px;
-    height: 22px;
-    top: 2px;
-  }
-  .toggle-ball.on {
-    left: 26px;
   }
 }
 
