@@ -1,6 +1,8 @@
-# Roda Keberuntungan Kelas
+# 🎡 Roda Keberuntungan Kelas
 
 Aplikasi web interaktif untuk memutar roda keberuntungan kelas dengan fitur AI-powered challenge menggunakan Google Gemini.
+
+**🔗 Live Demo:** [wheelduc.vercel.app](https://wheelduc.vercel.app/)
 
 ## Fitur Utama
 
@@ -35,10 +37,10 @@ Aplikasi web interaktif untuk memutar roda keberuntungan kelas dengan fitur AI-p
 
 ```bash
 # Clone repository
-git clone https://github.com/username/roda-keberuntungan-kelas.git
+git clone https://github.com/nandarjr660/wheel.git
 
 # Masuk ke direktori
-cd roda-keberuntungan-kelas
+cd wheel
 
 # Install dependencies
 npm install
@@ -57,7 +59,19 @@ Buka http://localhost:3000 di browser.
 | Variable | Deskripsi | Required |
 |----------|-----------|----------|
 | `GEMINI_API_KEY` | API key Google Gemini | Ya |
-| `NEXT_PUBLIC_APP_URL` | URL deployment app | Opsional |
+| `NEXT_PUBLIC_APP_URL` | URL deployment app (contoh: `https://wheelduc.vercel.app`) | Opsional |
+
+## Deployment
+
+Project sudah terdeploy di Vercel:
+
+**🔗 https://wheelduc.vercel.app/**
+
+Untuk deployment sendiri:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/nandarjr660/wheel)
+
+> Set environment variable `NEXT_PUBLIC_APP_URL=https://wheelduc.vercel.app` di dashboard Vercel agar sitemap, robots.txt, dan metadata berfungsi optimal.
 
 ## Struktur Project
 
