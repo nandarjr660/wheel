@@ -1,0 +1,33 @@
+{
+  "name": "Roda Keberuntungan Kelas - Smart Classroom AI Edition",
+  "description": "Aplikasi roda keberuntungan kelas interaktif dengan AI-powered challenge menggunakan Google Gemini. Gratis untuk guru dan siswa SD, SMP, SMA.",
+  "url": "https://roda-keberuntungan.vercel.app",
+  "applicationCategory": "EducationalApplication",
+  "keywords": [
+    "roda keberuntungan kelas",
+    "wheel of fortune classroom",
+    "spinner kelas online",
+    "random picker siswa",
+    "tantangan AI kelas",
+    "classroom spinner",
+    "guru digital",
+    "edtech Indonesia",
+    "Google Gemini classroom",
+    "ice breaking kelas"
+  ],
+  "author": {
+    "name": "hasmunandar",
+    "url": "https://instagram.com/hsmnandar"
+  },
+  "features": [
+    "Canvas-rendered spinning wheel dengan Retina/HiDPI support",
+    "AI-powered challenge menggunakan Google Gemini",
+    "Konfigurasi jenjang SD, SMP, SMA/SMK, Universitas",
+    "Confetti animation saat pemenang terpilih",
+    "Share ke WhatsApp dan Facebook",
+    "Dark mode dan Light mode",
+    "Responsive design untuk mobile dan desktop"
+  ],
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

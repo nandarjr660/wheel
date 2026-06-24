@@ -1,0 +1,799 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-card: var(--brand-card);
+  --color-brand-yellow: #facc15;
+  --color-brand-blue: #3b82f6;
+  --color-brand-green: #10b981;
+  --color-brand-red: #ef4444;
+  
+  --color-white: var(--tw-white);
+  --color-black: var(--tw-black);
+  --color-slate-200: var(--tw-slate-200);
+  --color-slate-300: var(--tw-slate-300);
+  --color-slate-400: var(--tw-slate-400);
+  --color-slate-500: var(--tw-slate-500);
+  --color-slate-600: var(--tw-slate-600);
+  --color-slate-800: var(--tw-slate-800);
+  --color-blue-300: var(--tw-blue-300);
+
+  /* ── 2026 Standard Breakpoints ── */
+  /* xs  : 360px  – small phones (iPhone SE 3rd gen, Galaxy A series) */
+  /* sm  : 430px  – large phones (iPhone 16 Pro Max, Galaxy S25 Ultra) */
+  /* md  : 768px  – tablets portrait (iPad 10th gen, Galaxy Tab S9) */
+  /* lg  : 1024px – tablets landscape / small laptops (iPad Pro, Surface Pro) */
+  /* xl  : 1280px – standard desktop */
+  /* 2xl : 1536px – large desktop / 4K scaled */
+  --breakpoint-xs: 360px;
+  --breakpoint-sm: 430px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+:root {
+  --brand-bg: #0f172a;
+  --brand-card: rgba(30, 41, 59, 0.7);
+  --glass-glow-bg: rgba(30, 41, 59, 0.5);
+  --surface-overlay: rgba(2, 6, 23, 0.92);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-glass-hover: rgba(255, 255, 255, 0.15);
+  --tw-white: #ffffff;
+  --tw-black: #000000;
+  --tw-slate-200: #e2e8f0;
+  --tw-slate-300: #cbd5e1;
+  --tw-slate-400: #94a3b8;
+  --tw-slate-500: #64748b;
+  --tw-slate-600: #475569;
+  --tw-slate-800: #1e293b;
+  --tw-blue-300: #93c5fd;
+  color-scheme: dark;
+
+  /* ── Fluid spacing scale ── */
+  --sp-xs: clamp(0.25rem, 1vw, 0.5rem);
+  --sp-sm: clamp(0.5rem, 2vw, 1rem);
+  --sp-md: clamp(0.75rem, 3vw, 1.5rem);
+  --sp-lg: clamp(1rem, 4vw, 2rem);
+  --sp-xl: clamp(1.5rem, 5vw, 3rem);
+
+  /* ── Fluid type scale ── */
+  --text-xs: clamp(0.65rem, 1.5vw, 0.75rem);
+  --text-sm: clamp(0.75rem, 2vw, 0.875rem);
+  --text-base: clamp(0.875rem, 2.5vw, 1rem);
+  --text-lg: clamp(1rem, 3vw, 1.125rem);
+  --text-xl: clamp(1.1rem, 3.5vw, 1.25rem);
+  --text-2xl: clamp(1.25rem, 4vw, 1.5rem);
+  --text-3xl: clamp(1.5rem, 5vw, 1.875rem);
+  --text-4xl: clamp(1.75rem, 6vw, 2.25rem);
+  --text-5xl: clamp(2rem, 8vw, 3rem);
+  --text-6xl: clamp(2.5rem, 10vw, 3.75rem);
+}
+
+[data-theme="light"] {
+  --brand-bg: #f1f5f9;
+  --brand-card: rgba(255, 255, 255, 0.85);
+  --glass-glow-bg: rgba(255, 255, 255, 0.65);
+  --surface-overlay: rgba(241, 245, 249, 0.95);
+  --border-glass: rgba(0, 0, 0, 0.08);
+  --border-glass-hover: rgba(0, 0, 0, 0.15);
+  --tw-white: #0f172a;
+  --tw-black: #ffffff;
+  --tw-slate-200: #334155;
+  --tw-slate-300: #475569;
+  --tw-slate-400: #64748b;
+  --tw-slate-500: #94a3b8;
+  --tw-slate-600: #cbd5e1;
+  --tw-slate-800: #e2e8f0;
+  --tw-blue-300: #3b82f6;
+  color-scheme: light;
+}
+
+/* ══════════════════════════════════════
+   GLOBAL RESETS & BASE
+══════════════════════════════════════ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Prevent horizontal overflow on all devices */
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  /* Improve tap target size on touch devices */
+  -webkit-tap-highlight-color: transparent;
+  /* Better text rendering */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg text-white font-sans overflow-x-hidden min-h-screen;
+    background-image: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(59,130,246,0.12) 0%, transparent 60%),
+                      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(16,185,129,0.08) 0%, transparent 50%),
+                      radial-gradient(ellipse 50% 40% at 20% 70%, rgba(250,204,21,0.06) 0%, transparent 50%);
+    /* Prevent layout shifts */
+    overflow-x: hidden;
+  }
+
+  [data-theme="light"] body {
+    background-image: radial-gradient(ellipse 80% 60% at 50% -20%, rgba(59,130,246,0.06) 0%, transparent 60%),
+                      radial-gradient(ellipse 60% 50% at 80% 80%, rgba(16,185,129,0.04) 0%, transparent 50%),
+                      radial-gradient(ellipse 50% 40% at 20% 70%, rgba(250,204,21,0.03) 0%, transparent 50%);
+  }
+}
+
+/* ══════════════════════════════════════
+   SCROLLBAR
+══════════════════════════════════════ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); }
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.25); }
+
+/* ══════════════════════════════════════
+   GLASS COMPONENTS
+══════════════════════════════════════ */
+.glass-card {
+  background: var(--brand-card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.glass-card-glow {
+  background: var(--glass-glow-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--border-glass);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* ══════════════════════════════════════
+   ACCESSIBILITY
+══════════════════════════════════════ */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ══════════════════════════════════════
+   TEXT EFFECTS
+══════════════════════════════════════ */
+.text-glow-yellow {
+  text-shadow: 0 0 40px rgba(250,204,21,0.15), 0 0 80px rgba(250,204,21,0.08);
+}
+
+/* ══════════════════════════════════════
+   SHIMMER ANIMATION
+══════════════════════════════════════ */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.03) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+[data-theme="light"] .shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(0,0,0,0.03) 50%, transparent 100%);
+  background-size: 200% 100%;
+}
+
+/* ══════════════════════════════════════
+   FORM ELEMENTS - LIGHT MODE
+══════════════════════════════════════ */
+[data-theme="light"] input, [data-theme="light"] select, [data-theme="light"] textarea {
+  background: #ffffff;
+  color: #0f172a;
+}
+[data-theme="light"] input::placeholder, [data-theme="light"] textarea::placeholder {
+  color: #94a3b8;
+}
+[data-theme="light"] select option {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+/* ══════════════════════════════════════
+   REDUCED MOTION
+══════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition: none !important;
+  }
+}
+
+/* ══════════════════════════════════════
+   WHEEL ANIMATIONS
+══════════════════════════════════════ */
+@keyframes wheel-idle {
+  0%, 100% { transform: rotate(-1.5deg); }
+  50% { transform: rotate(1.5deg); }
+}
+
+.wheel-idle {
+  animation: wheel-idle 3.5s ease-in-out infinite;
+}
+
+/* ══════════════════════════════════════
+   TOGGLE COMPONENT
+══════════════════════════════════════ */
+.toggle-track {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  border-radius: 999px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.toggle-track.on {
+  background-color: #10b981;
+}
+
+.toggle-track.off {
+  background-color: #334155;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="light"] .toggle-track.off {
+  background-color: #94a3b8;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.toggle-ball {
+  position: absolute;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  background: white;
+  border-radius: 50%;
+  transition: left 0.25s cubic-bezier(.4,.0,.2,1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="light"] .toggle-ball {
+  background: #0f172a;
+}
+
+.toggle-ball.off {
+  left: 2px;
+}
+
+.toggle-ball.on {
+  left: 22px;
+  background: #ffffff;
+}
+
+/* ══════════════════════════════════════
+   FIXED FLOATING BUTTONS
+   (Theme Toggle + Social Share)
+   Always visible on all devices & themes
+══════════════════════════════════════ */
+
+/* ── Dark mode (default) ── */
+.btn-theme {
+  background: rgba(15, 23, 42, 0.85);      /* solid dark */
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.04);
+}
+.btn-theme:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+}
+
+.btn-social-main {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+}
+.btn-social-main:hover {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-social-copy {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Light mode overrides ── */
+[data-theme="light"] .btn-theme {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0,0,0,0.04);
+}
+[data-theme="light"] .btn-theme:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="light"] .btn-social-main {
+  background: rgba(255, 255, 255, 0.92);
+  border-color: #cbd5e1;
+  color: #334155;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+[data-theme="light"] .btn-social-main:hover {
+  background: #f1f5f9;
+  border-color: #94a3b8;
+  color: #0f172a;
+}
+
+[data-theme="light"] .btn-social-copy {
+  border-color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.85);
+  color: #475569;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+[data-theme="light"] .btn-social-copy:hover {
+  border-color: #94a3b8;
+  background: #f1f5f9;
+  color: #1e293b;
+}
+
+/* ══════════════════════════════════════
+   RESPONSIVE LAYOUT — MAIN APP
+   2026 Device Standard Breakpoints
+══════════════════════════════════════ */
+
+/* ── Root wrapper ── */
+.app-root {
+  min-height: 100svh; /* svh = small viewport height, better on mobile with browser chrome */
+  padding: var(--sp-sm) var(--sp-sm);
+  /* Safe-area insets for iPhone notch / Dynamic Island / Android cutouts */
+  padding-top: max(var(--sp-sm), env(safe-area-inset-top));
+  padding-bottom: max(var(--sp-sm), env(safe-area-inset-bottom));
+  padding-left: max(var(--sp-sm), env(safe-area-inset-left));
+  padding-right: max(var(--sp-sm), env(safe-area-inset-right));
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+}
+
+/* xs: 360px – small phones */
+@media (min-width: 360px) {
+  .app-root {
+    padding: 0.75rem;
+  }
+}
+
+/* sm: 430px – large phones (iPhone 16 Pro Max, Galaxy S25 Ultra) */
+@media (min-width: 430px) {
+  .app-root {
+    padding: 1rem;
+  }
+}
+
+/* md: 768px – tablets portrait */
+@media (min-width: 768px) {
+  .app-root {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+/* lg: 1024px – tablets landscape / small laptops */
+@media (min-width: 1024px) {
+  .app-root {
+    padding: 1.5rem 2rem;
+  }
+}
+
+/* xl: 1280px – standard desktop */
+@media (min-width: 1280px) {
+  .app-root {
+    padding: 2rem 2.5rem;
+    max-width: 1440px;
+  }
+}
+
+/* 2xl: 1536px – large desktop */
+@media (min-width: 1536px) {
+  .app-root {
+    padding: 2rem 3rem;
+  }
+}
+
+/* ── App grid layout ── */
+.app-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  flex: 1;
+}
+
+/* Tablet landscape and above → 2-col layout */
+@media (min-width: 1024px) {
+  .app-grid {
+    grid-template-columns: 300px 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+}
+
+@media (min-width: 1280px) {
+  .app-grid {
+    grid-template-columns: 320px 1fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1536px) {
+  .app-grid {
+    grid-template-columns: 360px 1fr;
+    gap: 2rem;
+  }
+}
+
+/* ── Sidebar ── */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  order: 2;
+}
+
+@media (min-width: 768px) {
+  /* Tablet portrait: sidebar becomes horizontal 2-col row */
+  .sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    order: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Desktop: sidebar goes back to vertical stack on the left */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    order: 1;
+  }
+}
+
+/* ── Wheel area ── */
+.wheel-area {
+  order: 1;
+}
+
+@media (min-width: 1024px) {
+  .wheel-area {
+    order: 2;
+  }
+}
+
+/* ── Wheel canvas container ── */
+.wheel-container {
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+@media (min-width: 430px) {
+  .wheel-container {
+    max-width: 380px;
+  }
+}
+
+@media (min-width: 768px) {
+  .wheel-container {
+    max-width: 440px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wheel-container {
+    max-width: 460px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .wheel-container {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .wheel-container {
+    max-width: 560px;
+  }
+}
+
+/* ── SPIN button ── */
+.spin-btn {
+  margin-top: 1.25rem;
+  padding: 0.75rem 2.5rem;
+  font-size: 1.25rem;
+  border-radius: 9999px;
+}
+
+@media (min-width: 430px) {
+  .spin-btn {
+    padding: 0.875rem 3rem;
+    font-size: 1.375rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .spin-btn {
+    padding: 0.875rem 3.5rem;
+    font-size: 1.5rem;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .spin-btn {
+    padding: 0.875rem 3.5rem;
+    font-size: 1.625rem;
+    margin-top: 2rem;
+  }
+}
+
+/* ── Page header ── */
+.app-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .app-header {
+    margin-bottom: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-header {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* ── App title fluid size ── */
+.app-title {
+  font-size: clamp(1.75rem, 6vw, 3.25rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* ── Card sections ── */
+.section-card {
+  padding: 1rem;
+  border-radius: 1.25rem;
+}
+
+@media (min-width: 430px) {
+  .section-card {
+    padding: 1.25rem;
+    border-radius: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-card {
+    padding: 1.25rem 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-card {
+    padding: 1.5rem;
+  }
+}
+
+/* ── Modal / Winner overlay ── */
+.modal-inner {
+  max-width: min(95vw, 860px);
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .modal-inner {
+    max-width: min(90vw, 860px);
+  }
+}
+
+/* ── Challenge card inside modal ── */
+.challenge-card {
+  padding: 1.25rem;
+}
+
+@media (min-width: 430px) {
+  .challenge-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .challenge-card {
+    padding: 2rem 2.5rem;
+  }
+}
+
+/* ── Challenge question text fluid ── */
+.challenge-question {
+  font-size: clamp(1.1rem, 3.5vw, 2.25rem);
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+/* ── Winner name fluid ── */
+.winner-name-lg {
+  font-size: clamp(2.25rem, 12vw, 5rem);
+}
+.winner-name-md {
+  font-size: clamp(1.75rem, 9vw, 3.75rem);
+}
+.winner-name-sm {
+  font-size: clamp(1.5rem, 7vw, 2.75rem);
+}
+
+/* ── Toast notification ── */
+.toast-undo {
+  /* Avoid conflict with bottom nav on mobile */
+  bottom: 5rem;
+  right: 1rem;
+  left: auto;
+  max-width: calc(100vw - 2rem);
+}
+
+@media (min-width: 768px) {
+  .toast-undo {
+    bottom: 4.5rem;
+    max-width: 360px;
+  }
+}
+
+/* ── Fixed buttons (theme toggle, social) ── */
+.btn-theme {
+  position: fixed;
+  top: 0.75rem;
+  right: 1rem;
+  z-index: 50;
+  /* Minimum 44px tap target per WCAG 2.5.5 */
+  width: 2.75rem;
+  height: 2.75rem;
+}
+
+@media (min-width: 768px) {
+  .btn-theme {
+    top: 1rem;
+    right: 1.25rem;
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+}
+
+/* ── Input / Select tap targets ── */
+input, select, textarea, button {
+  /* WCAG 2.5.5: minimum 44×44px tap target on touch devices */
+  min-height: 44px;
+}
+
+@media (min-width: 1024px) {
+  input, select, textarea {
+    min-height: 40px;
+  }
+}
+
+/* ── Touch device: larger tap zones ── */
+@media (hover: none) and (pointer: coarse) {
+  button, a, [role="button"], [role="switch"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Bigger toggle on touch */
+  .toggle-track {
+    width: 52px;
+    height: 28px;
+  }
+  .toggle-ball {
+    width: 22px;
+    height: 22px;
+    top: 2px;
+  }
+  .toggle-ball.on {
+    left: 26px;
+  }
+}
+
+/* ══════════════════════════════════════
+   UTILITY CLASSES
+══════════════════════════════════════ */
+
+/* Fluid card label */
+.label-xs {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Fluid textarea height on mobile */
+@media (max-width: 767px) {
+  textarea.auto-rows {
+    min-height: 88px;
+  }
+}
+
+/* ══════════════════════════════════════
+   LANDSCAPE PHONE — special handling
+   (e.g. iPhone in landscape, ~844×390)
+══════════════════════════════════════ */
+@media (max-height: 500px) and (orientation: landscape) {
+  .app-root {
+    padding: 0.5rem 1rem;
+  }
+  
+  .app-header {
+    margin-bottom: 0.5rem;
+  }
+  
+  .app-title {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+  }
+  
+  .app-grid {
+    grid-template-columns: 260px 1fr;
+    gap: 0.75rem;
+  }
+  
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    order: 1;
+    overflow-y: auto;
+    max-height: calc(100svh - 100px);
+  }
+  
+  .wheel-area {
+    order: 2;
+  }
+  
+  .wheel-container {
+    max-width: 260px;
+  }
+  
+  .section-card {
+    padding: 0.625rem 0.875rem;
+    border-radius: 1rem;
+  }
+}
