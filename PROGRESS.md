@@ -2,10 +2,10 @@
 
 ## Tech Stack
 - Next.js 15 (App Router)
-- React 19
-- TypeScript
+- React 19 + TypeScript
 - Tailwind CSS v4
 - Framer Motion, Lucide React
+- Hosting: Vercel (Edge + Serverless)
 
 ## Live
 - **Web:** https://wheelduc.vercel.app/
@@ -14,21 +14,28 @@
 ## Project Structure
 
 ```
+public/
+├── favicon.svg                     — Icon roda (SVG)
+├── googlee34068ee5ad7b22d.html     — Google Search Console verification
+├── robots.txt                      — Static AI bot rules (wheelduc.vercel.app)
+└── sitemap.xml                     — Static sitemap (wheelduc.vercel.app)
+
 src/
 ├── app/
-│   ├── globals.css          — Design tokens, CSS vars, light mode, animations
-│   ├── layout.tsx           — Root layout + JSON-LD (WebApp, FAQ, HowTo)
-│   ├── page.tsx             — Main page (client component)
-│   ├── robots.ts            — AI bot access rules (GEO)
-│   ├── sitemap.ts           — Search engine sitemap
+│   ├── globals.css                 — Design tokens, CSS vars, light mode, animations
+│   ├── layout.tsx                  — Root layout + JSON-LD + Google verification
+│   ├── opengraph-image.tsx         — Dynamic OG image (Edge runtime)
+│   ├── page.tsx                    — Main page (client component)
+│   ├── robots.ts                   — Dynamic robots.txt fallback (VERCEL_URL aware)
+│   ├── sitemap.ts                  — Dynamic sitemap.xml fallback (VERCEL_URL aware)
 │   └── api/
 │       └── challenge/
-│           └── route.ts     — POST /api/challenge (AI soal via Gemini)
+│           └── route.ts            — POST /api/challenge (AI soal via Gemini)
 ├── components/
 │   └── ui/
-│       └── social-button.tsx — Share button (WA, FB, copy link)
+│       └── social-button.tsx       — Share button (WA, FB, copy link)
 └── services/
-    └── gemini.ts            — generateChallenge() untuk AI
+    └── gemini.ts                   — generateChallenge() untuk AI
 ```
 
 ## Completed Features
@@ -68,7 +75,7 @@ src/
 ### Dark / Light Mode
 - Dark sebagai default, toggle manual (fixed top-right, class `btn-theme`)
 - Semantic CSS variables di `:root` + `[data-theme="light"]`
-- `@theme` override built-in Tailwind colors (`white`, `black`, `slate-*`, `blue-300`) with `var()`
+- `@theme` override built-in Tailwind colors (`white`, `black`, `slate-*`, `blue-300`)
 - Input/select/textarea, scrollbar, shimmer, toggle switch — semua theme-aware
 - Light mode buttons: slate-200 surface, slate-300 border (kontras optimal)
 
@@ -80,9 +87,17 @@ src/
 
 ### SEO / GEO
 - Meta tags, OG, Twitter Cards, JSON-LD (WebApplication, FAQPage, HowTo)
-- `robots.ts` — allow all AI bots (GPTBot, ClaudeBot, PerplexityBot, etc.)
-- `sitemap.ts` — generates sitemap.xml
-- FAQ section di halaman utama
+- **Dynamic OG image** (`opengraph-image.tsx`) — gradient + teks, auto-generated
+- **Static robots.txt** — allow all AI bots (GPTBot, ClaudeBot, PerplexityBot, dll)
+- **Static sitemap.xml** — 4 entries dengan priority, URL `wheelduc.vercel.app`
+- **Dynamic fallback** robots/sitemap — pakai `VERCEL_URL` otomatis
+- **Google Search Console** — file verification + meta tag terpasang
+- FAQ section + JSON-LD di halaman utama
+
+### GitHub
+- Repo inisialisasi, `.next`/`.vscode` di .gitignore
+- Branch `main` terhubung ke `origin/main`
+- Auto-deploy Vercel dari branch `main`
 
 ## Design System
 
@@ -126,6 +141,8 @@ src/
 - Gemini API endpoint uses third-party proxy (`synoxcloud.xyz`), not direct Google AI
 
 ## Deployment Notes
-- Push ke GitHub → Vercel auto-deploy
-- Set `NEXT_PUBLIC_APP_URL=https://wheelduc.vercel.app` di Vercel env vars
-- Hapus `.next` dari git jika sudah terlanjur commit (done — ada di .gitignore)
+- Push ke GitHub → Vercel auto-deploy dari branch `main`
+- Static `robots.txt` / `sitemap.xml` di `public/` — selalu pakai URL `wheelduc.vercel.app`
+- Dynamic fallback sudah handle `VERCEL_URL` otomatis (tidak perlu env var)
+- OG image di-generate Edge runtime via `next/og`
+- Google Search Console: file + meta tag terpasang, tinggal submit sitemap
