@@ -2,7 +2,7 @@
 
 Aplikasi web interaktif untuk memutar roda keberuntungan kelas dengan fitur AI-powered challenge menggunakan Google Gemini.
 
-**🔗 Live Demo:** [wheelduc.vercel.app](https://wheelduc.vercel.app/)
+**🔗 Live Demo:** [https://wheelduc.vercel.app](https://wheelduc.vercel.app/)
 
 ## Fitur Utama
 
@@ -16,12 +16,13 @@ Aplikasi web interaktif untuk memutar roda keberuntungan kelas dengan fitur AI-p
 
 ## Tech Stack
 
-- Next.js 15 (App Router)
-- React 19
-- TypeScript
-- Tailwind CSS v4
-- Framer Motion
-- Lucide React
+- **Framework:** Next.js 15 (App Router)
+- **Runtime:** React 19 + TypeScript
+- **Styling:** Tailwind CSS v4
+- **Animation:** Framer Motion
+- **Icons:** Lucide React
+- **AI:** Google Gemini API
+- **Hosting:** Vercel (Edge + Serverless)
 
 ## Cara Menggunakan
 
@@ -63,23 +64,31 @@ Buka http://localhost:3000 di browser.
 
 ## Deployment
 
-Project sudah terdeploy di Vercel:
+Project ini sudah **live di Vercel** 🚀
 
-**🔗 https://wheelduc.vercel.app/**
+👉 **https://wheelduc.vercel.app**
 
-Untuk deployment sendiri:
+| Domain | Catatan |
+|--------|---------|
+| `wheelduc.vercel.app` | Production — auto-deploy dari branch `main` |
+
+> Set `NEXT_PUBLIC_APP_URL=https://wheelduc.vercel.app` di dashboard Vercel agar sitemap, robots, dan OG image berfungsi optimal.
+
+### Deploy sendiri
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/nandarjr660/wheel)
-
-> Set environment variable `NEXT_PUBLIC_APP_URL=https://wheelduc.vercel.app` di dashboard Vercel agar sitemap, robots.txt, dan metadata berfungsi optimal.
 
 ## Struktur Project
 
 ```
+public/
+├── favicon.svg             — Icon roda (SVG)
+
 src/
 ├── app/
-│   ├── globals.css          — Tailwind v4 theme & animations
-│   ├── layout.tsx           — Root layout dengan metadata SEO
+│   ├── globals.css          — Design tokens, light mode, animations
+│   ├── layout.tsx           — Root layout + JSON-LD (WebApp, FAQ, HowTo)
+│   ├── opengraph-image.tsx  — Dynamic OG image (Edge runtime)
 │   ├── page.tsx             — Main page (client component)
 │   ├── robots.ts            — AI bot access rules
 │   ├── sitemap.ts           — Search engine sitemap
