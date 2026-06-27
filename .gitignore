@@ -8,3 +8,10 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# SEO / GEO reports & progress (local only)
+seo-geo/
+reports/
+progress.*
+*-report.*
+analysis/

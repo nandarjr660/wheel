@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence, motion, animate } from 'framer-motion';
 import SocialButton from '@/components/ui/social-button';
 
 const COLORS = ['#38bdf8', '#4ade80', '#facc15', '#fb923c', '#fb7185', '#a78bfa', '#2dd4bf', '#f472b6', '#818cf8', '#34d399'];
@@ -185,8 +185,6 @@ export default function Page() {
     const stored = localStorage.getItem('theme');
     if (stored === 'light' || stored === 'dark') {
       setTheme(stored);
-    } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-      setTheme('light');
     }
   }, []);
 
@@ -214,28 +212,23 @@ export default function Page() {
     setChallenge(null);
     setShowAnswer(false);
 
-    const spinDuration = 4000;
     const startRotation = rotation;
     const extraSpins = (Math.random() * 5 + 5) * 2 * Math.PI;
-    const startTime = performance.now();
+    const targetRotation = startRotation + extraSpins;
 
-    const animate = (currentTime: number) => {
-      const elapsed = currentTime - startTime;
-      const progress = Math.min(elapsed / spinDuration, 1);
-      const easeOut = 1 - Math.pow(1 - progress, 3);
-      const currentRotation = startRotation + extraSpins * easeOut;
-      setRotation(currentRotation);
-      const canvas = canvasRef.current;
-      if (canvas) drawWheel(canvas, names, currentRotation);
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
+    animate(startRotation, targetRotation, {
+      duration: 4,
+      ease: [0.15, 0.85, 0.35, 1],
+      onUpdate: (latest) => {
+        const canvas = canvasRef.current;
+        if (canvas) drawWheel(canvas, names, latest);
+      },
+      onComplete: () => {
         setIsSpinning(false);
-        determineWinner(currentRotation);
-      }
-    };
-    requestAnimationFrame(animate);
+        setRotation(targetRotation);
+        determineWinner(targetRotation);
+      },
+    });
   };
 
   const determineWinner = async (finalRotation: number) => {
@@ -569,10 +562,7 @@ export default function Page() {
                   MEMUTAR...
                 </>
               ) : (
-                <>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/></svg>
-                  PUTAR!
-                </>
+                <>PUTAR!</>
               )}
             </span>
           </button>
@@ -590,7 +580,7 @@ export default function Page() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto"
-            style={{ background: 'var(--overlay-bg)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
+            style={{ background: 'var(--surface-overlay)', backdropFilter: 'blur(12px)', WebkitBackdropFilter: 'blur(12px)' }}
             role="dialog"
             aria-modal="true"
             aria-label="Pemenang terpilih"

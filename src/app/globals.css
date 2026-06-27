@@ -38,8 +38,8 @@
 
 :root {
   --brand-bg: #0f172a;
-  --brand-card: rgba(30, 41, 59, 0.7);
-  --glass-glow-bg: rgba(30, 41, 59, 0.5);
+  --brand-card: rgba(30, 41, 59, 0.85);
+  --glass-glow-bg: rgba(30, 41, 59, 0.7);
   --surface-overlay: rgba(2, 6, 23, 0.92);
   --border-glass: rgba(255, 255, 255, 0.08);
   --border-glass-hover: rgba(255, 255, 255, 0.15);
@@ -76,8 +76,8 @@
 
 [data-theme="light"] {
   --brand-bg: #f1f5f9;
-  --brand-card: rgba(255, 255, 255, 0.85);
-  --glass-glow-bg: rgba(255, 255, 255, 0.65);
+  --brand-card: rgba(255, 255, 255, 0.92);
+  --glass-glow-bg: rgba(255, 255, 255, 0.8);
   --surface-overlay: rgba(241, 245, 249, 0.95);
   --border-glass: rgba(0, 0, 0, 0.08);
   --border-glass-hover: rgba(0, 0, 0, 0.15);
