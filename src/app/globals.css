@@ -437,7 +437,7 @@ html {
 /* Tablet landscape and above → 2-col layout */
 @media (min-width: 1024px) {
   .app-grid {
-    grid-template-columns: 300px 1fr;
+    grid-template-columns: 320px 1fr;
     gap: 1.25rem;
     align-items: start;
   }
@@ -445,14 +445,14 @@ html {
 
 @media (min-width: 1280px) {
   .app-grid {
-    grid-template-columns: 320px 1fr;
+    grid-template-columns: 380px 1fr;
     gap: 1.5rem;
   }
 }
 
 @media (min-width: 1536px) {
   .app-grid {
-    grid-template-columns: 360px 1fr;
+    grid-template-columns: 420px 1fr;
     gap: 2rem;
   }
 }
@@ -499,95 +499,95 @@ html {
 /* ── Wheel canvas container ── */
 .wheel-container {
   width: 100%;
-  max-width: 340px;
+  max-width: 260px;
   margin: 0 auto;
 }
 
 @media (min-width: 430px) {
   .wheel-container {
-    max-width: 380px;
+    max-width: 290px;
   }
 }
 
 @media (min-width: 768px) {
   .wheel-container {
-    max-width: 440px;
+    max-width: 330px;
   }
 }
 
 @media (min-width: 1024px) {
   .wheel-container {
-    max-width: 460px;
+    max-width: 340px;
   }
 }
 
 @media (min-width: 1280px) {
   .wheel-container {
-    max-width: 500px;
+    max-width: 380px;
   }
 }
 
 @media (min-width: 1536px) {
   .wheel-container {
-    max-width: 560px;
+    max-width: 440px;
   }
 }
 
 /* ── SPIN button ── */
 .spin-btn {
-  margin-top: 1.25rem;
-  padding: 0.75rem 2.5rem;
-  font-size: 1.25rem;
+  margin-top: 0.625rem;
+  padding: 0.5rem 1.75rem;
+  font-size: 1rem;
   border-radius: 9999px;
 }
 
 @media (min-width: 430px) {
   .spin-btn {
-    padding: 0.875rem 3rem;
-    font-size: 1.375rem;
+    padding: 0.625rem 2rem;
+    font-size: 1.05rem;
   }
 }
 
 @media (min-width: 768px) {
   .spin-btn {
-    padding: 0.875rem 3.5rem;
-    font-size: 1.5rem;
-    margin-top: 1.5rem;
+    padding: 0.625rem 2.5rem;
+    font-size: 1.1rem;
+    margin-top: 0.75rem;
   }
 }
 
 @media (min-width: 1280px) {
   .spin-btn {
-    padding: 0.875rem 3.5rem;
-    font-size: 1.625rem;
-    margin-top: 2rem;
+    padding: 0.75rem 2.75rem;
+    font-size: 1.2rem;
+    margin-top: 1rem;
   }
 }
 
 /* ── Page header ── */
 .app-header {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 @media (min-width: 768px) {
   .app-header {
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.625rem;
   }
 }
 
 @media (min-width: 1024px) {
   .app-header {
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
   }
 }
 
 /* ── App title fluid size ── */
 .app-title {
-  font-size: clamp(1.75rem, 6vw, 3.25rem);
+  font-size: clamp(1.2rem, 3.5vw, 2rem);
   font-weight: 900;
   letter-spacing: -0.04em;
-  line-height: 1;
+  line-height: 1.1;
   text-transform: uppercase;
 }
 
@@ -718,6 +718,20 @@ input, select, textarea, button:not([role="switch"]) {
     min-height: 44px;
     min-width: 44px;
   }
+}
+
+/* ── Toast (generic feedback) ── */
+.toast-feedback {
+  position: fixed;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  pointer-events: none;
 }
 
 /* ══════════════════════════════════════

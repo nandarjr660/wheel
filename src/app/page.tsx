@@ -3,6 +3,9 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { AnimatePresence, motion, animate } from 'framer-motion';
 import SocialButton from '@/components/ui/social-button';
+import { useTranslation } from '@/i18n/LanguageProvider';
+import { initTickTracking, checkTick, fanfare, confettiPop, clickSound } from '@/services/sounds';
+import type { Lang } from '@/i18n/translations';
 
 const COLORS = ['#38bdf8', '#4ade80', '#facc15', '#fb923c', '#fb7185', '#a78bfa', '#2dd4bf', '#f472b6', '#818cf8', '#34d399'];
 
@@ -10,7 +13,7 @@ const GRADE_OPTIONS: Record<string, string[]> = {
   "SD": ["1", "2", "3", "4", "5", "6"],
   "SMP": ["VII", "VIII", "IX"],
   "SMA/SMK": ["X", "XI", "XII"],
-  "Universitas": ["Semester 1", "Semester 3", "Semester 5", "Semester 7"],
+  "Universitas": ["Semester 1", "Semester 2", "Semester 3", "Semester 4", "Semester 5"],
 };
 
 function fireConfetti() {
@@ -34,7 +37,7 @@ function fireConfetti() {
   }
 }
 
-function drawWheel(canvas: HTMLCanvasElement, names: string[], rotation: number) {
+function drawWheel(canvas: HTMLCanvasElement, names: string[], rotation: number, colors: string[] = COLORS) {
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
 
@@ -59,7 +62,7 @@ function drawWheel(canvas: HTMLCanvasElement, names: string[], rotation: number)
   names.forEach((name, i) => {
     const startAngle = i * sliceAngle + rotation;
     const endAngle = startAngle + sliceAngle;
-    const color = COLORS[i % COLORS.length];
+    const color = colors[i % colors.length];
 
     ctx.beginPath();
     ctx.moveTo(centerX, centerY);
@@ -174,6 +177,10 @@ export default function Page() {
   const [lastRemoved, setLastRemoved] = useState<string | null>(null);
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
 
+  const [toastMsg, setToastMsg] = useState<string | null>(null);
+
+  const { lang, setLang, t } = useTranslation();
+
   const undoTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -186,6 +193,7 @@ export default function Page() {
     if (stored === 'light' || stored === 'dark') {
       setTheme(stored);
     }
+
   }, []);
 
   useEffect(() => {
@@ -202,11 +210,12 @@ export default function Page() {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (canvas) drawWheel(canvas, names, rotation);
+    if (canvas) drawWheel(canvas, names, rotation, COLORS);
   }, [names, rotation]);
 
   const spin = () => {
     if (isSpinning || names.length === 0) return;
+    clickSound();
     setIsSpinning(true);
     setWinner(null);
     setChallenge(null);
@@ -216,12 +225,15 @@ export default function Page() {
     const extraSpins = (Math.random() * 5 + 5) * 2 * Math.PI;
     const targetRotation = startRotation + extraSpins;
 
+    initTickTracking(startRotation);
+
     animate(startRotation, targetRotation, {
       duration: 4,
       ease: [0.15, 0.85, 0.35, 1],
       onUpdate: (latest) => {
         const canvas = canvasRef.current;
-        if (canvas) drawWheel(canvas, names, latest);
+        if (canvas) drawWheel(canvas, names, latest, COLORS);
+        checkTick(latest);
       },
       onComplete: () => {
         setIsSpinning(false);
@@ -241,6 +253,7 @@ export default function Page() {
     setWinner(selectedWinner);
 
     fireConfetti();
+    { fanfare(); setTimeout(confettiPop, 300); }
 
     if (isChallengeEnabled) {
       setIsChallengeLoading(true);
@@ -251,7 +264,7 @@ export default function Page() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             topic: topic || "Pengetahuan Umum",
-            level, grade, winner: selectedWinner
+            level, grade, winner: selectedWinner, lang
           })
         });
         if (!response.ok) throw new Error('Gagal mendapat tantangan');
@@ -291,16 +304,21 @@ export default function Page() {
     if (undoTimeoutRef.current) clearTimeout(undoTimeoutRef.current);
   };
 
+  const showToast = useCallback((msg: string) => {
+    setToastMsg(msg);
+    setTimeout(() => setToastMsg(null), 2500);
+  }, []);
+
   return (
     <div className="app-root">
       <header className="app-header">
         <div className="inline-flex items-center gap-2 mb-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-brand-green animate-pulse" />
-          <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[3px] sm:tracking-[4px] text-slate-500">Smart Classroom AI Edition</p>
+          <p className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[3px] sm:tracking-[4px] text-slate-500">{t('header.badge')}</p>
           <span className="w-1.5 h-1.5 rounded-full bg-brand-blue animate-pulse" style={{ animationDelay: '0.5s' }} />
         </div>
         <h1 className="app-title text-brand-yellow text-glow-yellow font-sans">
-          Roda Keberuntungan<br className="sm:hidden" />{' '}Kelas
+          {t('header.title.line1')}<br className="sm:hidden" />{' '}{t('header.title.line2')}
         </h1>
       </header>
 
@@ -309,23 +327,23 @@ export default function Page() {
           <section className="glass-card section-card">
             <h2 className="text-sm sm:text-base font-bold mb-3 sm:mb-5 flex items-center gap-2 sm:gap-3">
               <span className="bg-brand-yellow/20 text-brand-yellow w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold">1</span>
-              <span>Setup Materi</span>
+              <span>{t('setup.heading')}</span>
             </h2>
             <div className="space-y-4">
               <div>
-                <label htmlFor="topic-input" className="label-xs block mb-1.5 text-slate-300">Topik Materi</label>
+                <label htmlFor="topic-input" className="label-xs block mb-1.5 text-slate-300">{t('setup.topicLabel')}</label>
                 <input
                   id="topic-input"
                   value={topic}
                   onChange={(e) => setTopic(e.target.value)}
                   type="text"
-                  placeholder="Contoh: Fotosintesis"
+                  placeholder={t('setup.topicPlaceholder')}
                   className="w-full px-4 py-3 rounded-xl bg-black/30 border-2 border-brand-blue/60 text-white placeholder-slate-500 outline-none focus:ring-2 focus:ring-brand-yellow focus:border-brand-yellow transition-all duration-200 text-sm"
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label htmlFor="level-select" className="label-xs block mb-1.5 text-slate-300">Jenjang</label>
+                  <label htmlFor="level-select" className="label-xs block mb-1.5 text-slate-300">{t('setup.level')}</label>
                   <select
                     id="level-select"
                     value={level}
@@ -336,7 +354,7 @@ export default function Page() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="grade-select" className="label-xs block mb-1.5 text-slate-300">Kelas/Smt</label>
+                  <label htmlFor="grade-select" className="label-xs block mb-1.5 text-slate-300">{t('setup.grade')}</label>
                   <select
                     id="grade-select"
                     value={grade}
@@ -344,106 +362,93 @@ export default function Page() {
                     className="w-full px-4 py-3 rounded-xl bg-black/30 border-2 border-brand-blue/60 text-white outline-none cursor-pointer text-sm focus:ring-2 focus:ring-brand-yellow focus:border-brand-yellow transition-all duration-200 [&>option]:bg-brand-bg [&>option]:text-white"
                   >
                     {(GRADE_OPTIONS[level] || []).map((opt) => (
-                      <option key={opt} value={opt}>{opt}</option>
+                  <option key={opt} value={opt}>{opt}</option>
                     ))}
                   </select>
                 </div>
               </div>
-              <div className="pt-3 flex items-center justify-between gap-3">
+              <div className="pt-2 flex items-center justify-between gap-3">
                 {/* Label + tooltip */}
                 <span className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                  Tantangan AI
+                  {t('setup.aiChallenge')}
                   <span className="group relative inline-flex">
                     <span className="w-4 h-4 rounded-full border border-slate-500 text-slate-400 text-[10px] font-bold flex items-center justify-center cursor-help leading-none">?</span>
                     <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-52 px-3 py-2 bg-slate-800 border border-slate-600 text-xs text-slate-200 rounded-lg shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-50 text-left font-normal normal-case leading-relaxed">
-                      <span className="font-semibold text-brand-green">ON:</span> AI membuat soal untuk siswa terpilih<br />
-                      <span className="font-semibold text-slate-400">OFF:</span> hanya menampilkan nama pemenang
+                      <span className="font-semibold text-brand-green">{t('setup.aiTooltipOn')}</span> {t('setup.aiTooltipOnDesc')}<br />
+                      <span className="font-semibold text-slate-400">{t('setup.aiTooltipOff')}</span> {t('setup.aiTooltipOffDesc')}
                       <span className="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 border-t-4 border-t-slate-600 border-l-transparent border-r-transparent" />
                     </span>
                   </span>
                 </span>
 
-                {/* ── Framer Motion Pill Toggle ── */}
+                {/* Clean pill toggle — no text */}
                 <motion.button
                   onClick={() => setIsChallengeEnabled(!isChallengeEnabled)}
                   role="switch"
                   aria-checked={isChallengeEnabled}
                   aria-label={isChallengeEnabled ? 'Nonaktifkan tantangan AI' : 'Aktifkan tantangan AI'}
-                  animate={{
+                  whileTap={{ scale: 0.92 }}
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                  style={{
+                    position: 'relative',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '8px',
+                    padding: '5px 10px 5px 6px',
+                    borderRadius: '999px',
+                    border: '1.5px solid',
+                    cursor: 'pointer',
+                    flexShrink: 0,
+                    outline: 'none',
+                    overflow: 'hidden',
+                    borderColor: isChallengeEnabled ? 'rgba(16,185,129,0.5)' : 'rgba(148,163,184,0.15)',
                     background: isChallengeEnabled
-                      ? 'linear-gradient(135deg, rgba(16,185,129,0.22) 0%, rgba(16,185,129,0.10) 100%)'
-                      : 'rgba(51,65,85,0.55)',
-                    borderColor: isChallengeEnabled
-                      ? 'rgba(16,185,129,0.55)'
-                      : 'rgba(148,163,184,0.22)',
+                      ? 'linear-gradient(135deg, rgba(16,185,129,0.18) 0%, rgba(5,150,105,0.08) 100%)'
+                      : 'rgba(30,41,59,0.6)',
                     boxShadow: isChallengeEnabled
                       ? '0 0 16px rgba(16,185,129,0.25), inset 0 1px 0 rgba(255,255,255,0.08)'
                       : 'inset 0 1px 0 rgba(255,255,255,0.04)',
                   }}
-                  whileTap={{ scale: 0.93 }}
-                  whileHover={{ scale: 1.04 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '7px',
-                    padding: '5px 11px 5px 7px',
-                    borderRadius: '999px',
-                    border: '1.5px solid transparent',
-                    cursor: 'pointer',
-                    flexShrink: 0,
-                    minHeight: '32px',
-                    whiteSpace: 'nowrap',
-                    outline: 'none',
-                  }}
                 >
-                  {/* ── Animated Knob ── */}
+                  {/* Glowing star icon */}
                   <motion.span
                     animate={{
-                      background: isChallengeEnabled ? '#10b981' : '#475569',
+                      background: isChallengeEnabled
+                        ? 'linear-gradient(135deg, #10b981, #059669)'
+                        : 'rgba(71,85,105,0.6)',
                       boxShadow: isChallengeEnabled
-                        ? '0 0 10px rgba(16,185,129,0.7), 0 0 20px rgba(16,185,129,0.3)'
-                        : '0 1px 3px rgba(0,0,0,0.3)',
-                      scale: isChallengeEnabled ? 1.05 : 1,
+                        ? '0 0 10px rgba(16,185,129,0.8), 0 0 20px rgba(16,185,129,0.3)'
+                        : 'none',
                     }}
-                    transition={{ type: 'spring', stiffness: 500, damping: 28 }}
+                    transition={{ type: 'spring', stiffness: 400, damping: 22 }}
                     style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '22px',
-                      height: '22px',
-                      borderRadius: '50%',
-                      flexShrink: 0,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      width: '22px', height: '22px', borderRadius: '7px', flexShrink: 0,
                     }}
                   >
-                    {/* ── Icon crossfade with AnimatePresence ── */}
                     <AnimatePresence mode="wait" initial={false}>
                       {isChallengeEnabled ? (
-                        <motion.span
-                          key="on-icon"
-                          initial={{ opacity: 0, rotate: -90, scale: 0.4 }}
-                          animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                          exit={{ opacity: 0, rotate: 90, scale: 0.4 }}
-                          transition={{ duration: 0.18, ease: 'easeOut' }}
+                        <motion.span key="on"
+                          initial={{ opacity: 0, scale: 0.3, rotate: -30 }}
+                          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                          exit={{ opacity: 0, scale: 0.3, rotate: 30 }}
+                          transition={{ duration: 0.2, ease: 'backOut' }}
                           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
-                          {/* sparkle / moon icon */}
-                          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+                          <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                            <path d="M12 2l2.09 6.26L20 10l-5.91 1.74L12 18l-2.09-6.26L4 10l5.91-1.74L12 2z"/>
                           </svg>
                         </motion.span>
                       ) : (
-                        <motion.span
-                          key="off-icon"
-                          initial={{ opacity: 0, rotate: 90, scale: 0.4 }}
-                          animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                          exit={{ opacity: 0, rotate: -90, scale: 0.4 }}
-                          transition={{ duration: 0.18, ease: 'easeOut' }}
+                        <motion.span key="off"
+                          initial={{ opacity: 0, scale: 0.3 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.3 }}
+                          transition={{ duration: 0.18 }}
                           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                         >
-                          {/* x icon */}
-                          <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round">
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="rgba(148,163,184,0.7)" strokeWidth="2.5" strokeLinecap="round">
                             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                           </svg>
                         </motion.span>
@@ -451,46 +456,24 @@ export default function Page() {
                     </AnimatePresence>
                   </motion.span>
 
-                  {/* ── Animated Label ── */}
-                  <AnimatePresence mode="wait" initial={false}>
-                    {isChallengeEnabled ? (
-                      <motion.span
-                        key="label-on"
-                        initial={{ opacity: 0, y: 6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -6 }}
-                        transition={{ duration: 0.15, ease: 'easeOut' }}
-                        style={{
-                          fontSize: '11px',
-                          fontWeight: 800,
-                          letterSpacing: '0.08em',
-                          textTransform: 'uppercase',
-                          color: '#10b981',
-                          lineHeight: 1,
-                        }}
-                      >
-                        ON
-                      </motion.span>
-                    ) : (
-                      <motion.span
-                        key="label-off"
-                        initial={{ opacity: 0, y: -6 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 6 }}
-                        transition={{ duration: 0.15, ease: 'easeOut' }}
-                        style={{
-                          fontSize: '11px',
-                          fontWeight: 700,
-                          letterSpacing: '0.08em',
-                          textTransform: 'uppercase',
-                          color: '#64748b',
-                          lineHeight: 1,
-                        }}
-                      >
-                        OFF
-                      </motion.span>
-                    )}
-                  </AnimatePresence>
+                  {/* Pill switch track */}
+                  <motion.span
+                    animate={{ background: isChallengeEnabled ? '#10b981' : '#334155' }}
+                    transition={{ duration: 0.22 }}
+                    style={{
+                      position: 'relative', display: 'flex', alignItems: 'center',
+                      width: '36px', height: '20px', borderRadius: '999px', flexShrink: 0, padding: '2px',
+                    }}
+                  >
+                    <motion.span
+                      animate={{ x: isChallengeEnabled ? 16 : 0 }}
+                      transition={{ type: 'spring', stiffness: 500, damping: 30 }}
+                      style={{
+                        width: '16px', height: '16px', borderRadius: '50%',
+                        background: 'white', boxShadow: '0 1px 3px rgba(0,0,0,0.3)', display: 'block',
+                      }}
+                    />
+                  </motion.span>
                 </motion.button>
               </div>
             </div>
@@ -499,30 +482,30 @@ export default function Page() {
           <section className="glass-card section-card">
             <h2 className="text-sm sm:text-base font-bold mb-3 sm:mb-5 flex items-center gap-2 sm:gap-3">
               <span className="bg-brand-green/20 text-brand-green w-7 h-7 rounded-lg flex items-center justify-center text-sm font-bold">2</span>
-              <span>Daftar Siswa</span>
+              <span>{t('students.heading')}</span>
             </h2>
             <div className="mt-0">
-              <label htmlFor="siswa-input" className="label-xs block mb-1.5 text-slate-300">Siswa Aktif</label>
+              <label htmlFor="siswa-input" className="label-xs block mb-1.5 text-slate-300">{t('students.label')}</label>
               <textarea
                 id="siswa-input"
                 value={namesInput}
                 onChange={(e) => setNamesInput(e.target.value)}
                 rows={3}
                 className="w-full px-4 py-3 rounded-xl bg-black/30 border-2 border-brand-green/40 text-brand-green font-medium text-sm outline-none focus:border-brand-green focus:ring-2 focus:ring-brand-green/30 transition-all duration-200 resize-none placeholder-slate-500"
-                placeholder="Andi, Budi, Citra..."
+                placeholder={t('students.placeholder')}
               />
               <button
                 onClick={handleUpdateWheel}
                 className="w-full mt-3 bg-brand-green hover:bg-emerald-500 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 cursor-pointer transition-all duration-200 active:scale-[0.98]"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M3 22v-6h6"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/></svg>
-                UPDATE RODA
+                {t('students.update')}
               </button>
             </div>
           </section>
         </div>
 
-        <div className="glass-card-glow wheel-area rounded-[24px] sm:rounded-[32px] p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center relative overflow-hidden">
+        <div className="glass-card-glow wheel-area rounded-[24px] sm:rounded-[32px] p-3 sm:p-4 md:p-5 flex flex-col items-center justify-center relative overflow-hidden">
           <div className="absolute inset-0 shimmer pointer-events-none" />
           <div className="wheel-container relative aspect-square">
             <div className="absolute -top-1 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
@@ -545,7 +528,7 @@ export default function Page() {
                 ref={canvasRef}
                 width={500} height={500}
                 className="w-full h-full drop-shadow-[0_0_60px_rgba(0,0,0,0.6)]"
-                aria-label={`Roda keberuntungan dengan ${names.length} siswa`}
+                aria-label={t('wheel.ariaLabel', { n: names.length })}
               />
             </div>
           </div>
@@ -559,15 +542,15 @@ export default function Page() {
               {isSpinning ? (
                 <>
                   <svg className="animate-spin" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-                  MEMUTAR...
+                  {t('wheel.spinning')}
                 </>
               ) : (
-                <>PUTAR!</>
+                <>{t('wheel.spin')}</>
               )}
             </span>
           </button>
           {names.length === 0 && !isSpinning && (
-            <p className="text-xs text-slate-500 mt-2">Tambahkan siswa terlebih dahulu</p>
+            <p className="text-xs text-slate-500 mt-2">{t('students.empty')}</p>
           )}
         </div>
       </div>
@@ -595,7 +578,7 @@ export default function Page() {
                 <div className="mb-8">
                   <div className="flex items-center justify-center gap-3 mb-4">
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#facc15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
-                    <span className="text-sm font-bold uppercase tracking-[4px] text-slate-400">Pemenang</span>
+                    <span className="text-sm font-bold uppercase tracking-[4px] text-slate-400">{t('wheel.winner')}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#facc15" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
                   </div>
                   <h2
@@ -615,7 +598,7 @@ export default function Page() {
                     {isChallengeLoading ? (
                       <div className="flex flex-col items-center py-10">
                         <div className="w-14 h-14 rounded-full border-[3px] border-brand-blue/30 border-t-brand-blue animate-spin mb-5" />
-                        <p className="text-xl font-bold text-blue-300">AI sedang menyiapkan tantangan seru...</p>
+                        <p className="text-xl font-bold text-blue-300">{t('wheel.challengeLoading')}</p>
                       </div>
                     ) : challengeError ? (
                       <div className="text-center py-8">
@@ -624,17 +607,17 @@ export default function Page() {
                           {challengeError}
                         </p>
                         <button
-                          onClick={() => { setChallengeError(null); setIsChallengeLoading(true); fetch('/api/challenge', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ topic: topic || "Pengetahuan Umum", level, grade, winner }) }).then(r => r.json()).then(d => { setChallenge(d); setIsChallengeLoading(false); }).catch(() => { setChallengeError('Gagal terhubung ke AI'); setIsChallengeLoading(false); }) }}
+                          onClick={() => { setChallengeError(null); setIsChallengeLoading(true); fetch('/api/challenge', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ topic: topic || "Pengetahuan Umum", level, grade, winner, lang }) }).then(r => r.json()).then(d => { setChallenge(d); setIsChallengeLoading(false); }).catch(() => { setChallengeError(t('wheel.challengeError')); setIsChallengeLoading(false); }) }}
                           className="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-bold transition-all cursor-pointer active:scale-[0.97]"
                         >
-                          COBA LAGI
+                          {t('wheel.retry')}
                         </button>
                       </div>
                     ) : (
                       <div className="space-y-6">
                         <div className="flex items-center justify-center gap-2 text-brand-yellow">
                           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-                          <span className="text-base font-bold uppercase tracking-[3px]">Tantangan AI</span>
+                          <span className="text-base font-bold uppercase tracking-[3px]">{t('wheel.challenge')}</span>
                           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
                         </div>
                         <p className="challenge-question text-white/90">
@@ -643,7 +626,7 @@ export default function Page() {
                         <div className="pt-5 border-t border-white/5">
                           {showAnswer ? (
                             <div>
-                              <span className="text-xs font-bold text-brand-green uppercase tracking-[3px] block mb-2">Jawaban</span>
+                              <span className="text-xs font-bold text-brand-green uppercase tracking-[3px] block mb-2">{t('wheel.answer')}</span>
                               <p className="text-xl md:text-2xl font-bold text-brand-green">{challenge?.answer}</p>
                             </div>
                           ) : (
@@ -651,7 +634,7 @@ export default function Page() {
                               onClick={() => setShowAnswer(true)}
                               className="px-6 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-bold transition-all cursor-pointer active:scale-[0.97]"
                             >
-                              LIHAT JAWABAN
+                              {t('wheel.viewAnswer')}
                             </button>
                           )}
                         </div>
@@ -666,14 +649,14 @@ export default function Page() {
                     className="px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-base font-bold transition-all duration-200 flex items-center gap-2.5 cursor-pointer active:scale-[0.97]"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    TUTUP
+                    {t('wheel.close')}
                   </button>
                   <button
                     onClick={removeWinner}
                     className="px-8 py-4 bg-linear-to-b from-brand-red to-red-600 hover:from-red-500 hover:to-red-700 rounded-xl text-base font-bold transition-all duration-200 flex items-center gap-2.5 cursor-pointer shadow-lg shadow-red-900/30 active:scale-[0.97]"
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
-                    HAPUS & TUTUP
+                    {t('wheel.removeAndClose')}
                   </button>
                 </div>
               </motion.div>
@@ -693,12 +676,12 @@ export default function Page() {
             role="status"
             aria-live="polite"
           >
-            <p className="text-sm text-white/80">{lastRemoved} telah dihapus</p>
+            <p className="text-sm text-white/80">{t('wheel.undoRemoved', { name: lastRemoved })}</p>
             <button
               onClick={undoRemove}
               className="text-xs font-bold text-brand-yellow uppercase tracking-wider hover:text-yellow-300 transition-colors cursor-pointer"
             >
-              Urungkan
+              {t('wheel.undo')}
             </button>
           </motion.div>
         )}
@@ -726,24 +709,24 @@ export default function Page() {
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
               </svg>
             </div>
-            <h2 className="text-2xl font-bold text-white mb-2">Selamat Datang di Roda Keberuntungan!</h2>
-            <p className="text-sm text-slate-400 mb-6">Jangan lupa follow Instagram kami ya</p>
-            <a
-              href="https://instagram.com/hsmnandar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-6 py-3 bg-linear-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCAF45] rounded-xl text-white font-bold text-sm transition-all duration-200 hover:scale-105 cursor-pointer"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-              </svg>
-              Follow @hsmnandar
+              <h2 className="text-2xl font-bold text-white mb-2">{t('welcome.title')}</h2>
+              <p className="text-sm text-slate-400 mb-6">{t('welcome.desc')}</p>
+              <a
+                href="https://instagram.com/hsmnandar"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-6 py-3 bg-linear-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCAF45] rounded-xl text-white font-bold text-sm transition-all duration-200 hover:scale-105 cursor-pointer"
+              >
+                <svg viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+                {t('welcome.follow')}
             </a>
             <button
               onClick={dismissWelcome}
               className="block mx-auto mt-5 text-xs text-slate-500 hover:text-slate-300 transition-colors cursor-pointer"
             >
-              Lewati
+              {t('welcome.skip')}
             </button>
           </motion.div>
         </motion.div>
@@ -756,42 +739,42 @@ export default function Page() {
       <section id="cara-pakai" className="mt-6 glass-card p-6 md:p-8 rounded-[24px]" aria-labelledby="howto-heading">
         <h2 id="howto-heading" className="text-xl font-bold mb-6 text-brand-blue flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          Cara Menggunakan
+          {t('howto.heading')}
         </h2>
         <ol className="space-y-4">
           <li className="flex gap-4 items-start">
             <span className="shrink-0 w-8 h-8 rounded-full bg-brand-yellow/20 text-brand-yellow flex items-center justify-center font-bold text-sm">1</span>
             <div>
-              <h3 className="font-semibold text-white/90 mb-1">Input Nama Siswa</h3>
-              <p className="text-sm text-slate-300">Masukkan nama-nama siswa dipisahkan dengan koma pada kolom &quot;Daftar Siswa&quot;. Contoh: Andi, Budi, Siti, Dewi.</p>
+              <h3 className="font-semibold text-white/90 mb-1">{t('howto.step1.title')}</h3>
+              <p className="text-sm text-slate-300">{t('howto.step1.desc')}</p>
             </div>
           </li>
           <li className="flex gap-4 items-start">
             <span className="shrink-0 w-8 h-8 rounded-full bg-brand-green/20 text-brand-green flex items-center justify-center font-bold text-sm">2</span>
             <div>
-              <h3 className="font-semibold text-white/90 mb-1">Setup Materi</h3>
-              <p className="text-sm text-slate-300">Masukkan topik materi pelajaran, pilih jenjang (SD/SMP/SMA/Universitas), dan tentukan kelas atau semester.</p>
+              <h3 className="font-semibold text-white/90 mb-1">{t('howto.step2.title')}</h3>
+              <p className="text-sm text-slate-300">{t('howto.step2.desc')}</p>
             </div>
           </li>
           <li className="flex gap-4 items-start">
             <span className="shrink-0 w-8 h-8 rounded-full bg-brand-blue/20 text-brand-blue flex items-center justify-center font-bold text-sm">3</span>
             <div>
-              <h3 className="font-semibold text-white/90 mb-1">Aktifkan AI Challenge</h3>
-              <p className="text-sm text-slate-300">Aktifkan toggle &quot;Tantangan AI&quot; jika ingin siswa yang terpilih mendapatkan soal dari AI. Nonaktifkan jika hanya ingin menampilkan nama pemenang.</p>
+              <h3 className="font-semibold text-white/90 mb-1">{t('howto.step3.title')}</h3>
+              <p className="text-sm text-slate-300">{t('howto.step3.desc')}</p>
             </div>
           </li>
           <li className="flex gap-4 items-start">
             <span className="shrink-0 w-8 h-8 rounded-full bg-brand-red/20 text-brand-red flex items-center justify-center font-bold text-sm">4</span>
             <div>
-              <h3 className="font-semibold text-white/90 mb-1">Putar Roda</h3>
-              <p className="text-sm text-slate-300">Klik tombol <strong className="text-brand-yellow">&quot;PUTAR!&quot;</strong> untuk memutar roda. Tunggu hingga roda berhenti dan pemenang ditampilkan dengan confetti.</p>
+              <h3 className="font-semibold text-white/90 mb-1">{t('howto.step4.title')}</h3>
+              <p className="text-sm text-slate-300">{t('howto.step4.desc')}</p>
             </div>
           </li>
           <li className="flex gap-4 items-start">
             <span className="shrink-0 w-8 h-8 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">5</span>
             <div>
-              <h3 className="font-semibold text-white/90 mb-1">Lihat Tantangan AI</h3>
-              <p className="text-sm text-slate-300">Jika AI Challenge aktif, soal tantangan akan ditampilkan. Klik &quot;LIHAT JAWABAN&quot; untuk melihat jawaban yang benar.</p>
+              <h3 className="font-semibold text-white/90 mb-1">{t('howto.step5.title')}</h3>
+              <p className="text-sm text-slate-300">{t('howto.step5.desc')}</p>
             </div>
           </li>
         </ol>
@@ -801,49 +784,49 @@ export default function Page() {
       <section id="fitur" className="mt-6 glass-card p-6 md:p-8 rounded-[24px]" aria-labelledby="features-heading">
         <h2 id="features-heading" className="text-xl font-bold mb-6 text-brand-green flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Fitur Unggulan
+          {t('features.heading')}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
             <span className="text-brand-yellow text-lg">&#9889;</span>
             <div>
-              <h3 className="font-semibold text-white/90 text-sm">Canvas-Rendered Wheel</h3>
-              <p className="text-xs text-slate-400">Roda berputar dengan kualitas Retina/HiDPI support</p>
+              <h3 className="font-semibold text-white/90 text-sm">{t('features.wheel')}</h3>
+              <p className="text-xs text-slate-400">{t('features.wheelDesc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
             <span className="text-brand-blue text-lg">&#129302;</span>
             <div>
-              <h3 className="font-semibold text-white/90 text-sm">AI-Powered Challenge</h3>
-              <p className="text-xs text-slate-400">Soal otomatis menggunakan Google Gemini AI</p>
+              <h3 className="font-semibold text-white/90 text-sm">{t('features.ai')}</h3>
+              <p className="text-xs text-slate-400">{t('features.aiDesc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
             <span className="text-brand-green text-lg">&#127912;</span>
             <div>
-              <h3 className="font-semibold text-white/90 text-sm">Confetti Animation</h3>
-              <p className="text-xs text-slate-400">Efek confetti meriah saat pemenang terpilih</p>
+              <h3 className="font-semibold text-white/90 text-sm">{t('features.confetti')}</h3>
+              <p className="text-xs text-slate-400">{t('features.confettiDesc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
             <span className="text-brand-red text-lg">&#128241;</span>
             <div>
-              <h3 className="font-semibold text-white/90 text-sm">Responsive Design</h3>
-              <p className="text-xs text-slate-400">Tampilan optimal di mobile dan desktop</p>
+              <h3 className="font-semibold text-white/90 text-sm">{t('features.responsive')}</h3>
+              <p className="text-xs text-slate-400">{t('features.responsiveDesc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
             <span className="text-purple-400 text-lg">&#127769;</span>
             <div>
-              <h3 className="font-semibold text-white/90 text-sm">Dark & Light Mode</h3>
-              <p className="text-xs text-slate-400">Theme toggle sesuai preferensi pengguna</p>
+              <h3 className="font-semibold text-white/90 text-sm">{t('features.theme')}</h3>
+              <p className="text-xs text-slate-400">{t('features.themeDesc')}</p>
             </div>
           </div>
           <div className="flex items-start gap-3 p-3 rounded-xl hover:bg-white/5 transition-colors">
             <span className="text-orange-400 text-lg">&#128279;</span>
             <div>
-              <h3 className="font-semibold text-white/90 text-sm">Social Sharing</h3>
-              <p className="text-xs text-slate-400">Share ke WhatsApp dan Facebook</p>
+              <h3 className="font-semibold text-white/90 text-sm">{t('features.sharing')}</h3>
+              <p className="text-xs text-slate-400">{t('features.sharingDesc')}</p>
             </div>
           </div>
         </div>
@@ -853,53 +836,43 @@ export default function Page() {
       <section id="faq" className="mt-6 glass-card p-6 md:p-8 rounded-[24px]" aria-labelledby="faq-heading">
         <h2 id="faq-heading" className="text-xl font-bold mb-6 text-brand-yellow flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><path d="M12 17h.01"/></svg>
-          Pertanyaan Umum (FAQ)
+          {t('faq.heading')}
         </h2>
         <div className="space-y-4">
           <details className="group">
             <summary className="flex items-center justify-between cursor-pointer py-3 px-4 rounded-xl hover:bg-white/5 transition-colors">
-              <span className="font-semibold text-white/90">Apa itu Roda Keberuntungan Kelas?</span>
+              <span className="font-semibold text-white/90">{t('faq.q1')}</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 group-open:rotate-180 transition-transform"><polyline points="6 9 12 15 18 9"/></svg>
             </summary>
-            <div className="px-4 pb-3 text-sm text-slate-300 leading-relaxed">
-              Roda Keberuntungan Kelas adalah aplikasi web interaktif yang memungkinkan guru memutar roda keberuntungan untuk memilih siswa secara acak, dilengkapi dengan tantangan AI menggunakan Google Gemini untuk membuat soal pelajaran yang seru. Cocok untuk ice breaking dan pembelajaran aktif di kelas SD, SMP, SMA, maupun Universitas.
-            </div>
+            <div className="px-4 pb-3 text-sm text-slate-300 leading-relaxed">{t('faq.a1')}</div>
           </details>
           <details className="group">
             <summary className="flex items-center justify-between cursor-pointer py-3 px-4 rounded-xl hover:bg-white/5 transition-colors">
-              <span className="font-semibold text-white/90">Bagaimana cara menggunakan?</span>
+              <span className="font-semibold text-white/90">{t('faq.q2')}</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 group-open:rotate-180 transition-transform"><polyline points="6 9 12 15 18 9"/></svg>
             </summary>
-            <div className="px-4 pb-3 text-sm text-slate-300 leading-relaxed">
-              Masukkan nama-nama siswa dipisahkan dengan koma, pilih jenjang dan kelas, lalu klik tombol <strong className="text-brand-yellow">PUTAR</strong> untuk memutar roda. Siswa yang terpilih akan mendapatkan tantangan AI berupa soal pelajaran yang relevan dengan topik yang diinput.
-            </div>
+            <div className="px-4 pb-3 text-sm text-slate-300 leading-relaxed">{t('faq.a2')}</div>
           </details>
           <details className="group">
             <summary className="flex items-center justify-between cursor-pointer py-3 px-4 rounded-xl hover:bg-white/5 transition-colors">
-              <span className="font-semibold text-white/90">Apakah aplikasi ini gratis?</span>
+              <span className="font-semibold text-white/90">{t('faq.q3')}</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 group-open:rotate-180 transition-transform"><polyline points="6 9 12 15 18 9"/></svg>
             </summary>
-            <div className="px-4 pb-3 text-sm text-slate-300 leading-relaxed">
-              Ya, aplikasi ini <strong className="text-brand-green">100% gratis</strong>. Anda hanya membutuhkan browser modern untuk mengaksesnya. Fitur AI menggunakan Google Gemini yang tersedia secara gratis.
-            </div>
+            <div className="px-4 pb-3 text-sm text-slate-300 leading-relaxed">{t('faq.a3')}</div>
           </details>
           <details className="group">
             <summary className="flex items-center justify-between cursor-pointer py-3 px-4 rounded-xl hover:bg-white/5 transition-colors">
-              <span className="font-semibold text-white/90">Jenjang apa saja yang didukung?</span>
+              <span className="font-semibold text-white/90">{t('faq.q4')}</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 group-open:rotate-180 transition-transform"><polyline points="6 9 12 15 18 9"/></svg>
             </summary>
-            <div className="px-4 pb-3 text-sm text-slate-300 leading-relaxed">
-              Aplikasi mendukung jenjang <strong>SD</strong> (Kelas 1-6), <strong>SMP</strong> (Kelas VII-IX), <strong>SMA/SMK</strong> (Kelas X-XII), dan <strong>Universitas</strong> (Semester 1, 3, 5, 7). Setiap jenjang memiliki opsi kelas yang sesuai.
-            </div>
+            <div className="px-4 pb-3 text-sm text-slate-300 leading-relaxed">{t('faq.a4')}</div>
           </details>
           <details className="group">
             <summary className="flex items-center justify-between cursor-pointer py-3 px-4 rounded-xl hover:bg-white/5 transition-colors">
-              <span className="font-semibold text-white/90">Bagaimana fitur AI Challenge bekerja?</span>
+              <span className="font-semibold text-white/90">{t('faq.q5')}</span>
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-400 group-open:rotate-180 transition-transform"><polyline points="6 9 12 15 18 9"/></svg>
             </summary>
-            <div className="px-4 pb-3 text-sm text-slate-300 leading-relaxed">
-              Ketika fitur AI Challenge aktif, sistem akan mengirimkan topik, jenjang, dan kelas ke Google Gemini AI untuk membuat soal tantangan yang relevan. Siswa yang terpilih harus menjawab soal tersebut. Guru dapat melihat jawaban dengan mengklik tombol &quot;LIHAT JAWABAN&quot;.
-            </div>
+            <div className="px-4 pb-3 text-sm text-slate-300 leading-relaxed">{t('faq.a5')}</div>
           </details>
         </div>
       </section>
@@ -907,30 +880,56 @@ export default function Page() {
       {/* ── Footer bar ── */}
       <footer className="mt-6 pt-3 border-t border-white/5">
         <p className="text-[11px] font-medium text-slate-600 tracking-wider select-none">
-          &copy; hasmunandar
+          &copy; {t('footer.copyright')}
         </p>
       </footer>
 
-      {/* ── Fixed: Theme Toggle (top-right, always visible) ── */}
-      <button
-        onClick={toggleTheme}
-        className="btn-theme fixed top-4 right-4 z-50 w-11 h-11 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 shadow-lg"
-        aria-label={theme === 'dark' ? 'Beralih ke tema terang' : 'Beralih ke tema gelap'}
-        title={theme === 'dark' ? 'Tema Terang' : 'Tema Gelap'}
-      >
-        {theme === 'dark' ? (
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-300">
-            <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-          </svg>
-        ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-700">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-          </svg>
-        )}
-      </button>
+      {/* ── Fixed: Utility Bar (top-right) — Language + Theme ── */}
+      <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
+        <button
+          onClick={() => setLang(lang === 'id' ? 'en' : 'id')}
+          className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 shadow-lg text-xs font-black"
+          aria-label={lang === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
+          title={lang === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
+          style={{ background: 'rgba(15,23,42,0.75)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)', color: '#facc15' }}
+        >
+          {lang === 'id' ? 'ID' : 'EN'}
+        </button>
+        <button
+          onClick={toggleTheme}
+          className="w-10 h-10 rounded-full flex items-center justify-center cursor-pointer transition-all duration-200 shadow-lg"
+          aria-label={theme === 'dark' ? t('theme.light') : t('theme.dark')}
+          title={theme === 'dark' ? t('theme.light') : t('theme.dark')}
+          style={{ background: 'rgba(15,23,42,0.75)', backdropFilter: 'blur(12px)', border: '1px solid rgba(255,255,255,0.1)' }}
+        >
+          {theme === 'dark' ? (
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-yellow-300">
+              <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-700">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          )}
+        </button>
+      </div>
 
       {/* ── Fixed: Social Share (bottom-right, always visible) ── */}
       <SocialButton />
+
+      {/* ── Toast Feedback ── */}
+      <AnimatePresence>
+        {toastMsg && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            className="toast-feedback glass-card text-white"
+          >
+            {toastMsg}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

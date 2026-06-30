@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import { LanguageProvider } from '@/i18n/LanguageProvider';
 
 // 2026 standard viewport — explicit declaration for mobile, tablet, desktop
 export const viewport: Viewport = {
@@ -219,7 +220,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

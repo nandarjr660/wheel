@@ -13,7 +13,7 @@ const VALID_GRADES: Record<string, string[]> = {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { topic, level, grade, winner } = body;
+    const { topic, level, grade, winner, lang } = body;
 
     // Validate required fields
     if (!topic || !level || !grade || !winner) {
@@ -46,7 +46,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Input terlalu panjang' }, { status: 400 });
     }
 
-    const challenge = await generateChallenge(topic, level, grade, winner);
+    const challenge = await generateChallenge(topic, level, grade, winner, lang || 'id');
     return NextResponse.json(challenge);
   } catch (error: unknown) {
     console.error('Error generating challenge in API Route:', error);
