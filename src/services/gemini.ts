@@ -19,7 +19,7 @@ async function callAI(prompt: string): Promise<string> {
         contents: [{ parts: [{ text: prompt }] }],
         generationConfig: {
           temperature: 0.7,
-          maxOutputTokens: 300,
+          maxOutputTokens: 2048,
         },
       }),
       signal: controller.signal,
