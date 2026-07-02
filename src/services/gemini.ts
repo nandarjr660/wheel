@@ -1,22 +1,39 @@
-const API_URL = "https://api.synoxcloud.xyz/ai-chat/claude-opus-4.6";
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+const GEMINI_MODEL = 'gemini-3.5-flash';
+const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent`;
 
 // Internal helper — not exported to prevent direct misuse
 async function callAI(prompt: string): Promise<string> {
+  if (!GEMINI_API_KEY) {
+    throw new Error('GEMINI_API_KEY is not set in environment variables');
+  }
+
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 15_000); // 15s timeout
 
   try {
-    const res = await fetch(`${API_URL}?pesan=${encodeURIComponent(prompt)}`, {
+    const res = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: {
+          temperature: 0.7,
+          maxOutputTokens: 300,
+        },
+      }),
       signal: controller.signal,
     });
 
     if (!res.ok) {
-      throw new Error(`AI API responded with status ${res.status}`);
+      const errBody = await res.text();
+      throw new Error(`Gemini API responded with status ${res.status}: ${errBody}`);
     }
 
     const data = await res.json();
-    if (!data.status) throw new Error(data.message || "AI API error");
-    return data.result.reply as string;
+    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!reply) throw new Error('Empty response from Gemini API');
+    return reply as string;
   } finally {
     clearTimeout(timeout);
   }
@@ -90,9 +107,10 @@ Pilih yang paling cocok, jangan dipaksakan.
   const prompt = lang === 'en'
     ? `You are a creative and adaptive teaching assistant.
 
-Task: 1 question for student "${winner}".
+Task: Generate 1 question for student "${winner}".
 Topic: "${topic}"
 Level: ${level} (${grade})
+Output language: ${promptLang}
 
 ${topicGuidance}
 
@@ -102,14 +120,14 @@ LANGUAGE STYLE: ${languageGuidelines[level] || "Adapt to the level."}
 Requirements:
 - Max 25 words
 - Include the answer
-
-Output MUST be JSON:
-{"question": "question", "answer": "answer"}`
+- Output MUST be valid JSON only, no other text:
+{"question": "question text", "answer": "answer text"}`
     : `Anda asisten guru kreatif dan adaptif.
 
-Tugas: 1 pertanyaan untuk siswa "${winner}".
+Tugas: Buat 1 pertanyaan untuk siswa "${winner}".
 Topik: "${topic}"
 Jenjang: ${level} (${grade})
+Bahasa output: ${promptLang}
 
 ${topicGuidance}
 
@@ -119,9 +137,8 @@ GAYA BAHASA: ${languageGuidelines[level] || "Sesuaikan dengan jenjang."}
 Ketentuan:
 - Maks 25 kata
 - Sertakan jawaban
-
-Output HARUS JSON:
-{"question": "pertanyaan", "answer": "jawaban"}`;
+- Output HARUS JSON valid saja, tanpa teks lain:
+{"question": "teks pertanyaan", "answer": "teks jawaban"}`;
 
   const reply = await callAI(prompt);
   const json = reply.match(/\{.*\}/s);
@@ -129,5 +146,3 @@ Output HARUS JSON:
   if (!result.question || !result.answer) throw new Error(lang === 'en' ? "Invalid response from AI" : "Response tidak valid dari AI");
   return { question: result.question, answer: result.answer };
 }
-
-
