@@ -1,12 +1,12 @@
-# 🎡 Roda Keberuntungan Kelas
+# 🎡 SpinClass
 
-Aplikasi web interaktif untuk memutar roda keberuntungan kelas dengan fitur AI-powered challenge menggunakan Google Gemini.
+Aplikasi web interaktif untuk spinner kelas dengan fitur AI-powered challenge menggunakan Google Gemini.
 
-**🔗 Live Demo:** [https://wheelduc.vercel.app](https://wheelduc.vercel.app/)
+**🔗 Live Demo:** [https://spinclass.vercel.app](https://spinclass.vercel.app/)
 
 ## Fitur Utama
 
-- **Roda Berputar Interaktif** — Canvas-rendered dengan kualitas Retina/HiDPI support
+- **Spinner Interaktif** — Canvas-rendered dengan kualitas Retina/HiDPI support
 - **AI Challenge** — Soal otomatis dari Google Gemini berdasarkan topik dan jenjang
 - **Multi Jenjang** — SD, SMP, SMA/SMK, dan Universitas
 - **Confetti Animation** — Efek confetti meriah saat pemenang terpilih
@@ -31,7 +31,7 @@ Aplikasi web interaktif untuk memutar roda keberuntungan kelas dengan fitur AI-p
 3. Pilih jenjang (SD/SMP/SMA/Universitas) dan kelas
 4. Input topik materi pelajaran
 5. Aktifkan toggle "Tantangan AI" jika ingin soal dari AI
-6. Klik tombol **PUTAR!** untuk memutar roda
+6. Klik tombol **PUTAR!** untuk memutar spinner
 7. Siswa terpilih akan mendapatkan tantangan AI
 
 ## Instalasi Lokal
@@ -60,19 +60,19 @@ Buka http://localhost:3000 di browser.
 | Variable | Deskripsi | Required |
 |----------|-----------|----------|
 | `GEMINI_API_KEY` | API key Google Gemini | Ya |
-| `NEXT_PUBLIC_APP_URL` | URL deployment app (contoh: `https://wheelduc.vercel.app`) | Opsional |
+| `NEXT_PUBLIC_APP_URL` | URL deployment app (contoh: `https://spinclass.vercel.app`) | Opsional |
 
 ## Deployment
 
 Project ini sudah **live di Vercel** 🚀
 
-👉 **https://wheelduc.vercel.app**
+👉 **https://spinclass.vercel.app**
 
 | Domain | Catatan |
 |--------|---------|
-| `wheelduc.vercel.app` | Production — auto-deploy dari branch `main` |
+| `spinclass.vercel.app` | Production — auto-deploy dari branch `main` |
 
-> Set `NEXT_PUBLIC_APP_URL=https://wheelduc.vercel.app` di dashboard Vercel agar sitemap, robots, dan OG image berfungsi optimal.
+> Set `NEXT_PUBLIC_APP_URL=https://spinclass.vercel.app` di dashboard Vercel agar sitemap, robots, dan OG image berfungsi optimal.
 
 ### Deploy sendiri
 
@@ -83,11 +83,12 @@ Project ini sudah **live di Vercel** 🚀
 ```
 public/
 ├── favicon.svg             — Icon roda (SVG)
+├── llms.txt                — AI context file
 
 src/
 ├── app/
 │   ├── globals.css          — Design tokens, light mode, animations
-│   ├── layout.tsx           — Root layout + JSON-LD (WebApp, FAQ, HowTo)
+│   ├── layout.tsx           — Root layout + JSON-LD (WebApp, FAQ, HowTo, Organization, Person)
 │   ├── opengraph-image.tsx  — Dynamic OG image (Edge runtime)
 │   ├── page.tsx             — Main page (client component)
 │   ├── robots.ts            — AI bot access rules
@@ -107,7 +108,7 @@ src/
 Project ini sudah dioptimasi untuk:
 
 - **Traditional SEO** — Meta tags, OG, Twitter Cards, JSON-LD
-- **GEO (Generative Engine Optimization)** — FAQ Schema, HowTo Schema, akses AI bots
+- **GEO (Generative Engine Optimization)** — FAQ Schema, HowTo Schema, Organization Schema, Person Schema, akses AI bots, llms.txt
 - **AI Search Engines** — ChatGPT, Perplexity, Google AI Overview, Copilot, Claude
 
 ## Lisensi

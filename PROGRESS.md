@@ -1,4 +1,4 @@
-# Roda Keberuntungan Kelas — Project Progress
+# SpinClass — Project Progress
 
 ## Tech Stack
 - Next.js 15 (App Router)
@@ -8,7 +8,7 @@
 - Hosting: Vercel (Edge + Serverless)
 
 ## Live
-- **Web:** https://wheelduc.vercel.app/
+- **Web:** https://spinclass.vercel.app/
 - **Repo:** https://github.com/nandarjr660/wheel
 
 ## Project Structure
@@ -17,8 +17,9 @@
 public/
 ├── favicon.svg                     — Icon roda (SVG)
 ├── googlee34068ee5ad7b22d.html     — Google Search Console verification
-├── robots.txt                      — Static AI bot rules (wheelduc.vercel.app)
-└── sitemap.xml                     — Static sitemap (wheelduc.vercel.app)
+├── llms.txt                        — AI context file
+├── robots.txt                      — Static AI bot rules (spinclass.vercel.app)
+└── sitemap.xml                     — Static sitemap (spinclass.vercel.app)
 
 src/
 ├── app/
@@ -86,12 +87,13 @@ src/
 - All interactive elements have `aria-label` or visible label
 
 ### SEO / GEO
-- Meta tags, OG, Twitter Cards, JSON-LD (WebApplication, FAQPage, HowTo)
+- Meta tags, OG, Twitter Cards, JSON-LD (WebApplication, FAQPage, HowTo, Organization, Person)
 - **Dynamic OG image** (`opengraph-image.tsx`) — gradient + teks, auto-generated
 - **Static robots.txt** — allow all AI bots (GPTBot, ClaudeBot, PerplexityBot, dll)
-- **Static sitemap.xml** — 4 entries dengan priority, URL `wheelduc.vercel.app`
+- **Static sitemap.xml** — 4 entries dengan priority, URL `spinclass.vercel.app`
 - **Dynamic fallback** robots/sitemap — pakai `VERCEL_URL` otomatis
 - **Google Search Console** — file verification + meta tag terpasang
+- **llms.txt** — AI context file untuk machine-readable summaries
 - FAQ section + JSON-LD di halaman utama
 
 ### GitHub
@@ -142,7 +144,7 @@ src/
 
 ## Deployment Notes
 - Push ke GitHub → Vercel auto-deploy dari branch `main`
-- Static `robots.txt` / `sitemap.xml` di `public/` — selalu pakai URL `wheelduc.vercel.app`
+- Static `robots.txt` / `sitemap.xml` di `public/` — selalu pakai URL `spinclass.vercel.app`
 - Dynamic fallback sudah handle `VERCEL_URL` otomatis (tidak perlu env var)
 - OG image di-generate Edge runtime via `next/og`
 - Google Search Console: file + meta tag terpasang, tinggal submit sitemap

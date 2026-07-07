@@ -14,21 +14,21 @@ export const viewport: Viewport = {
   ],
 };
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://wheelduc.vercel.app';
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://spinclass.vercel.app';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Roda Keberuntungan Kelas - Smart Classroom AI Edition',
-    template: '%s | Roda Keberuntungan Kelas',
+    default: 'SpinClass - Smart Classroom AI Edition',
+    template: '%s | SpinClass',
   },
-  description: 'Aplikasi roda keberuntungan kelas interaktif dengan AI-powered challenge menggunakan Google Gemini. Gratis untuk guru dan siswa SD, SMP, SMA.',
+  description: 'Aplikasi spinner kelas interaktif dengan AI-powered challenge menggunakan Google Gemini. Gratis untuk guru dan siswa SD, SMP, SMA.',
   keywords: [
-    'roda keberuntungan kelas',
-    'wheel of fortune classroom',
-    'Spinner kelas online',
+    'spinclass',
+    'spinner kelas',
+    'classroom spinner',
     'random picker siswa',
     'tantangan AI kelas',
-    'classroom spinner',
+    'roda keberuntungan kelas',
     'guru digital',
     'edtech Indonesia',
     'Google Gemini classroom',
@@ -45,22 +45,22 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'id_ID',
     url: '/',
-    siteName: 'Roda Keberuntungan Kelas',
-    title: 'Roda Keberuntungan Kelas - Smart Classroom AI Edition',
-    description: 'Aplikasi roda keberuntungan kelas interaktif dengan AI-powered challenge menggunakan Google Gemini. Gratis untuk guru dan siswa SD, SMP, SMA.',
+    siteName: 'SpinClass',
+    title: 'SpinClass - Smart Classroom AI Edition',
+    description: 'Aplikasi spinner kelas interaktif dengan AI-powered challenge menggunakan Google Gemini. Gratis untuk guru dan siswa SD, SMP, SMA.',
     images: [
       {
         url: '/opengraph-image',
         width: 1200,
         height: 630,
-        alt: 'Roda Keberuntungan Kelas - Smart Classroom AI Edition',
+        alt: 'SpinClass - Smart Classroom AI Edition',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Roda Keberuntungan Kelas - Smart Classroom AI Edition',
-    description: 'Aplikasi roda keberuntungan kelas interaktif dengan AI-powered challenge menggunakan Google Gemini.',
+    title: 'SpinClass - Smart Classroom AI Edition',
+    description: 'Aplikasi spinner kelas interaktif dengan AI-powered challenge menggunakan Google Gemini.',
     images: ['/opengraph-image'],
     creator: '@hsmnandar',
   },
@@ -83,11 +83,12 @@ export const metadata: Metadata = {
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebApplication',
-  name: 'Roda Keberuntungan Kelas',
-  description: 'Aplikasi roda keberuntungan kelas interaktif dengan AI-powered challenge menggunakan Google Gemini. Gratis untuk guru dan siswa SD, SMP, SMA.',
+  name: 'SpinClass',
+  description: 'Aplikasi spinner kelas interaktif dengan AI-powered challenge menggunakan Google Gemini. Gratis untuk guru dan siswa SD, SMP, SMA.',
   url: APP_URL,
   applicationCategory: 'EducationalApplication',
   operatingSystem: 'Web Browser',
+  dateModified: new Date().toISOString().split('T')[0],
   offers: {
     '@type': 'Offer',
     price: '0',
@@ -112,29 +113,60 @@ const jsonLd = {
   accessibilityHazard: 'none',
 };
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'SpinClass',
+  url: APP_URL,
+  logo: `${APP_URL}/favicon.svg`,
+  sameAs: [
+    'https://instagram.com/hsmnandar',
+    'https://github.com/nandarjr660/wheel',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    availableLanguage: ['Indonesian', 'English'],
+  },
+};
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'hasmunandar',
+  url: 'https://instagram.com/hsmnandar',
+  jobTitle: 'Educational Technology Developer',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'SpinClass',
+  },
+  knowsAbout: ['Google Gemini', 'Next.js', 'React', 'Educational Technology'],
+};
+
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
+  dateModified: new Date().toISOString().split('T')[0],
   mainEntity: [
     {
       '@type': 'Question',
-      name: 'Apa itu Roda Keberuntungan Kelas?',
+      name: 'Apa itu SpinClass?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Roda Keberuntungan Kelas adalah aplikasi web interaktif yang memungkinkan guru memutar roda keberuntungan untuk memilih siswa secara acak, dilengkapi dengan tantangan AI menggunakan Google Gemini untuk membuat soal pelajaran yang seru.',
+        text: 'SpinClass adalah aplikasi web interaktif yang memungkinkan guru memutar spinner untuk memilih siswa secara acak, dilengkapi dengan tantangan AI menggunakan Google Gemini untuk membuat soal pelajaran yang seru.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Bagaimana cara menggunakan Roda Keberuntungan Kelas?',
+      name: 'Bagaimana cara menggunakan SpinClass?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Masukkan nama-nama siswa, pilih jenjang dan kelas, lalu klik tombol PUTAR untuk memutar roda. Siswa yang terpilih akan mendapatkan tantangan AI berupa soal pelajaran yang relevan dengan topik yang diinput.',
+        text: 'Masukkan nama-nama siswa, pilih jenjang dan kelas, lalu klik tombol PUTAR untuk memutar spinner. Siswa yang terpilih akan mendapatkan tantangan AI berupa soal pelajaran yang relevan dengan topik yang diinput.',
       },
     },
     {
       '@type': 'Question',
-      name: 'Apakah Roda Keberuntungan Kelas gratis?',
+      name: 'Apakah SpinClass gratis?',
       acceptedAnswer: {
         '@type': 'Answer',
         text: 'Ya, aplikasi ini 100% gratis. Anda hanya membutuhkan browser modern untuk mengaksesnya. Fitur AI menggunakan Google Gemini yang tersedia secara gratis.',
@@ -162,8 +194,9 @@ const faqJsonLd = {
 const howToJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'HowTo',
-  name: 'Cara Menggunakan Roda Keberuntungan Kelas',
-  description: 'Panduan langkah demi langkah menggunakan aplikasi roda keberuntungan kelas dengan AI challenge.',
+  name: 'Cara Menggunakan SpinClass',
+  description: 'Panduan langkah demi langkah menggunakan aplikasi SpinClass dengan AI challenge.',
+  dateModified: new Date().toISOString().split('T')[0],
   step: [
     {
       '@type': 'HowToStep',
@@ -216,6 +249,14 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
       </head>
       <body>

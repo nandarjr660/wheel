@@ -1,0 +1,43 @@
+# SpinClass — Smart Classroom AI Edition
+
+> Aplikasi web interaktif untuk spinner kelas dengan fitur AI-powered challenge menggunakan Google Gemini. Gratis untuk guru dan siswa SD, SMP, SMA/SMK, dan Universitas.
+
+## Fitur Utama
+
+- **Spinner Interaktif** — Canvas-rendered dengan kualitas Retina/HiDPI support
+- **AI Challenge** — Soal otomatis dari Google Gemini berdasarkan topik dan jenjang
+- **Multi Jenjang** — SD (Kelas 1-6), SMP (Kelas VII-IX), SMA/SMK (Kelas X-XII), Universitas (Semester 1-5)
+- **Confetti Animation** — Efek confetti meriah saat pemenang terpilih
+- **Dark & Light Mode** — Theme toggle sesuai preferensi
+- **Social Sharing** — Share ke WhatsApp dan Facebook
+- **Responsive Design** — Tampilan optimal di mobile dan desktop
+
+## Cara Menggunakan
+
+1. Masukkan nama-nama siswa dipisahkan dengan koma
+2. Pilih jenjang (SD/SMP/SMA/Universitas) dan kelas
+3. Input topik materi pelajaran
+4. Aktifkan toggle "Tantangan AI" jika ingin soal dari AI
+5. Klik tombol PUTAR! untuk memutar spinner
+6. Siswa terpilih akan mendapatkan tantangan AI
+
+## Halaman Utama
+
+- [Beranda](/) — Aplikasi spinner kelas interaktif
+- [Cara Pakai](/#cara-pakai) — Panduan langkah demi langkah
+- [Fitur](/#fitur) — Daftar fitur lengkap
+- [FAQ](/#faq) — Pertanyaan yang sering diajukan
+
+## Tech Stack
+
+- Next.js 15 (App Router)
+- React 19 + TypeScript
+- Tailwind CSS v4
+- Framer Motion
+- Google Gemini API
+
+## Kontak
+
+- Author: hasmunandar
+- Instagram: https://instagram.com/hsmnandar
+- GitHub: https://github.com/nandarjr660/wheel
