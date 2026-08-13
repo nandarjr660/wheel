@@ -2,12 +2,11 @@ import { NextResponse } from 'next/server';
 import { generateChallenge } from '@/services/gemini';
 
 // Allowed values to prevent injection via enum
-const VALID_LEVELS = ['SD', 'SMP', 'SMA/SMK', 'Universitas'];
+const VALID_LEVELS = ['SD', 'SMP', 'SMA/SMK'];
 const VALID_GRADES: Record<string, string[]> = {
   'SD': ['1', '2', '3', '4', '5', '6'],
   'SMP': ['VII', 'VIII', 'IX'],
   'SMA/SMK': ['X', 'XI', 'XII'],
-  'Universitas': ['Semester 1', 'Semester 3', 'Semester 5', 'Semester 7'],
 };
 
 export async function POST(request: Request) {

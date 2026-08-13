@@ -57,10 +57,7 @@ export async function generateChallenge(
       : "Gunakan bahasa sedikit lebih formal dari SD, tetap semangat. Sesuai untuk remaja 12-15 tahun.",
     "SMA/SMK": lang === 'en'
       ? "Use adult, challenging language. Scientific terms related to the material are allowed."
-      : "Gunakan bahasa dewasa dan menantang. Boleh pakai istilah ilmiah sesuai materi.",
-    "Universitas": lang === 'en'
-      ? "Use academic language. Technical and analytical terms are allowed."
-      : "Gunakan bahasa akademis. Boleh istilah teknis dan analitis."
+      : "Gunakan bahasa dewasa dan menantang. Boleh pakai istilah ilmiah sesuai materi."
   };
 
   const topicGuidance = lang === 'en'
@@ -98,9 +95,6 @@ Pilih yang paling cocok, jangan dipaksakan.
     if (level === "SMA/SMK") return lang === 'en'
       ? `High school grade ${grade}: adult language, scientific terms allowed. Can include reasoning questions.`
       : `Siswa SMA/SMK kelas ${grade}: bahasa dewasa, istilah ilmiah diperbolehkan. Bisa soal penalaran.`;
-    if (level === "Universitas") return lang === 'en'
-      ? `University semester ${grade}: academic, analytical, technical language.`
-      : `Mahasiswa semester ${grade}: bahasa akademis, analitis, teknis.`;
     return "";
   })();
 

@@ -102,7 +102,7 @@ const jsonLd = {
   featureList: [
     'Canvas-rendered spinning wheel dengan Retina/HiDPI support',
     'AI-powered challenge menggunakan Google Gemini',
-    'Konfigurasi jenjang SD, SMP, SMA/SMK, Universitas',
+    'Konfigurasi jenjang SD, SMP, SMA/SMK',
     'Confetti animation saat pemenang terpilih',
     'Share ke WhatsApp dan Facebook',
     'Dark mode dan Light mode',
@@ -177,7 +177,7 @@ const faqJsonLd = {
       name: 'Jenjang apa saja yang didukung?',
       acceptedAnswer: {
         '@type': 'Answer',
-        text: 'Aplikasi mendukung jenjang SD (Kelas 1-6), SMP (Kelas VII-IX), SMA/SMK (Kelas X-XII), dan Universitas (Semester 1, 3, 5, 7). Setiap jenjang memiliki opsi kelas yang sesuai.',
+        text: 'Aplikasi mendukung jenjang SD (Kelas 1-6), SMP (Kelas VII-IX), dan SMA/SMK (Kelas X-XII). Setiap jenjang memiliki opsi kelas yang sesuai.',
       },
     },
     {
@@ -206,7 +206,7 @@ const howToJsonLd = {
     {
       '@type': 'HowToStep',
       name: 'Setup Materi',
-      text: 'Masukkan topik materi pelajaran, pilih jenjang (SD/SMP/SMA/Universitas), dan tentukan kelas atau semester.',
+      text: 'Masukkan topik materi pelajaran, pilih jenjang (SD/SMP/SMA/SMK), dan tentukan kelas.',
     },
     {
       '@type': 'HowToStep',

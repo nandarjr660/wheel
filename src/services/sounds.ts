@@ -57,7 +57,7 @@ export function checkTick(currentRotation: number) {
   if (delta >= TICK_THRESHOLD) {
     // Volume scales down slightly as wheel slows (based on delta magnitude)
     const speed = Math.min(delta / 0.3, 1);
-    const volume = 0.5 + speed * 0.5;
+    const volume = 0.25 + speed * 0.25;
     tick(volume);
     lastTickRotation = currentRotation;
   }

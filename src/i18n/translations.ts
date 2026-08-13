@@ -9,6 +9,9 @@ const translations: Record<Lang, Record<string, string>> = {
     'header.title.line1': 'Roda Keberuntungan',
     'header.title.line2': 'Kelas',
 
+    // Hero
+    'hero.sub': 'Putar roda untuk memilih siswa secara acak dan adil di kelas.',
+
     // Setup Materi
     'setup.heading': 'Setup Materi',
     'setup.topicLabel': 'Topik Materi',
@@ -22,6 +25,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'setup.aiTooltipOnDesc': 'AI membuat soal untuk siswa terpilih',
     'setup.aiTooltipOff': 'OFF:',
     'setup.aiTooltipOffDesc': 'hanya menampilkan nama pemenang',
+    'setup.close': 'Tutup panel pengaturan',
 
     // Daftar Siswa
     'students.heading': 'Daftar Siswa',
@@ -58,7 +62,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'howto.step1.title': 'Input Nama Siswa',
     'howto.step1.desc': 'Masukkan nama-nama siswa dipisahkan dengan koma pada kolom "Daftar Siswa". Contoh: Andi, Budi, Siti, Dewi.',
     'howto.step2.title': 'Setup Materi',
-    'howto.step2.desc': 'Masukkan topik materi pelajaran, pilih jenjang (SD/SMP/SMA/Universitas), dan tentukan kelas atau semester.',
+    'howto.step2.desc': 'Masukkan topik materi pelajaran, pilih jenjang (SD/SMP/SMA/SMK), dan tentukan kelas.',
     'howto.step3.title': 'Aktifkan AI Challenge',
     'howto.step3.desc': 'Aktifkan toggle "Tantangan AI" jika ingin siswa yang terpilih mendapatkan soal dari AI. Nonaktifkan jika hanya ingin menampilkan nama pemenang.',
     'howto.step4.title': 'Putar Roda',
@@ -84,13 +88,13 @@ const translations: Record<Lang, Record<string, string>> = {
     // FAQ
     'faq.heading': 'Pertanyaan Umum (FAQ)',
     'faq.q1': 'Apa itu Roda Keberuntungan Kelas?',
-    'faq.a1': 'Roda Keberuntungan Kelas adalah aplikasi web interaktif yang memungkinkan guru memutar roda keberuntungan untuk memilih siswa secara acak, dilengkapi dengan tantangan AI menggunakan Google Gemini untuk membuat soal pelajaran yang seru. Cocok untuk ice breaking dan pembelajaran aktif di kelas SD, SMP, SMA, maupun Universitas.',
+    'faq.a1': 'Roda Keberuntungan Kelas adalah aplikasi web interaktif yang memungkinkan guru memutar roda keberuntungan untuk memilih siswa secara acak, dilengkapi dengan tantangan AI menggunakan Google Gemini untuk membuat soal pelajaran yang seru. Cocok untuk ice breaking dan pembelajaran aktif di kelas SD, SMP, dan SMA/SMK.',
     'faq.q2': 'Bagaimana cara menggunakan?',
     'faq.a2': 'Masukkan nama-nama siswa dipisahkan dengan koma, pilih jenjang dan kelas, lalu klik tombol PUTAR untuk memutar roda. Siswa yang terpilih akan mendapatkan tantangan AI berupa soal pelajaran yang relevan dengan topik yang diinput.',
     'faq.q3': 'Apakah aplikasi ini gratis?',
     'faq.a3': 'Ya, aplikasi ini 100% gratis. Anda hanya membutuhkan browser modern untuk mengaksesnya. Fitur AI menggunakan Google Gemini yang tersedia secara gratis.',
     'faq.q4': 'Jenjang apa saja yang didukung?',
-    'faq.a4': 'Aplikasi mendukung jenjang SD (Kelas 1-6), SMP (Kelas VII-IX), SMA/SMK (Kelas X-XII), dan Universitas (Semester 1, 3, 5, 7). Setiap jenjang memiliki opsi kelas yang sesuai.',
+    'faq.a4': 'Aplikasi mendukung jenjang SD (Kelas 1-6), SMP (Kelas VII-IX), dan SMA/SMK (Kelas X-XII). Setiap jenjang memiliki opsi kelas yang sesuai.',
     'faq.q5': 'Bagaimana fitur AI Challenge bekerja?',
     'faq.a5': 'Ketika fitur AI Challenge aktif, sistem akan mengirimkan topik, jenjang, dan kelas ke Google Gemini AI untuk membuat soal tantangan yang relevan. Siswa yang terpilih harus menjawab soal tersebut. Guru dapat melihat jawaban dengan mengklik tombol "LIHAT JAWABAN".',
 
@@ -99,6 +103,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Footer
     'footer.copyright': 'hasmunandar',
+    'footer.statement': 'Membuat pemilihan siswa di kelas jadi seru dan adil.',
 
     // Theme toggle
     'theme.light': 'Tema Terang',
@@ -110,6 +115,9 @@ const translations: Record<Lang, Record<string, string>> = {
     'header.badge': 'Smart Classroom AI Edition',
     'header.title.line1': 'Class Fortune',
     'header.title.line2': 'Wheel',
+
+    // Hero
+    'hero.sub': 'Spin the wheel to pick a student at random, fairly and openly.',
 
     // Setup Materi
     'setup.heading': 'Setup Subject',
@@ -124,6 +132,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'setup.aiTooltipOnDesc': 'AI creates a quiz for the selected student',
     'setup.aiTooltipOff': 'OFF:',
     'setup.aiTooltipOffDesc': 'only shows the winner name',
+    'setup.close': 'Close settings panel',
 
     // Daftar Siswa
     'students.heading': 'Student List',
@@ -160,7 +169,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'howto.step1.title': 'Enter Student Names',
     'howto.step1.desc': 'Enter student names separated by commas in the "Student List" field. Example: Andi, Budi, Siti, Dewi.',
     'howto.step2.title': 'Setup Subject',
-    'howto.step2.desc': 'Enter the lesson topic, select the level (Elementary/Middle/High/University), and choose the grade or semester.',
+    'howto.step2.desc': 'Enter the lesson topic, select the level (Elementary/Middle/High), and choose the grade.',
     'howto.step3.title': 'Enable AI Challenge',
     'howto.step3.desc': 'Enable the "AI Challenge" toggle if you want the selected student to receive a quiz from AI. Disable it to only show the winner name.',
     'howto.step4.title': 'Spin the Wheel',
@@ -192,7 +201,7 @@ const translations: Record<Lang, Record<string, string>> = {
     'faq.q3': 'Is this application free?',
     'faq.a3': 'Yes, this application is 100% free. You only need a modern browser to access it. The AI feature uses Google Gemini which is available for free.',
     'faq.q4': 'Which levels are supported?',
-    'faq.a4': 'The application supports Elementary (Grades 1-6), Middle School (Grades 7-9), High School (Grades 10-12), and University (Semesters 1, 3, 5, 7). Each level has appropriate grade options.',
+    'faq.a4': 'The application supports Elementary (Grades 1-6), Middle School (Grades 7-9), and High School (Grades 10-12). Each level has appropriate grade options.',
     'faq.q5': 'How does the AI Challenge feature work?',
     'faq.a5': 'When AI Challenge is active, the system sends the topic, level, and grade to Google Gemini AI to create a relevant challenge quiz. The selected student must answer the question. Teachers can view the answer by clicking the "VIEW ANSWER" button.',
 
@@ -201,6 +210,7 @@ const translations: Record<Lang, Record<string, string>> = {
 
     // Footer
     'footer.copyright': 'hasmunandar',
+    'footer.statement': 'Making the classroom pick fair, quick, and fun.',
 
     // Theme toggle
     'theme.light': 'Light Theme',
