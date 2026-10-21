@@ -1,0 +1,187 @@
+- generic [ref=f22e2]:
+  - banner [ref=f22e4]:
+    - generic [ref=f22e5]:
+      - generic [ref=f22e6]:
+        - button "Main menu" [ref=f22e7] [cursor=pointer]
+        - link "Google Search Console" [ref=f22e12] [cursor=pointer]:
+          - /url: ./search-console?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+      - generic [ref=f22e14]:
+        - search [ref=f22e16]:
+          - generic [ref=f22e22]:
+            - textbox [disabled] [aria-hidden] [ref=f22e23]: Inspect any URL in "https://mauppg.biz.id/"
+            - combobox "Inspect any URL in https://mauppg.biz.id/" [ref=f22e24]
+          - button "Search" [ref=f22e25] [cursor=pointer]
+        - generic [ref=f22e29]:
+          - generic [ref=f22e31]:
+            - generic [ref=f22e33]:
+              - button "Help" [ref=f22e34] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f22e36]: help_outline
+              - tooltip [aria-hidden] [ref=f22e38]: Help
+            - generic [ref=f22e40]:
+              - button "User settings" [ref=f22e41] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f22e43]: manage_accounts
+              - tooltip [aria-hidden] [ref=f22e45]: User settings
+          - generic [ref=f22e48]:
+            - generic [ref=f22e49]:
+              - 'button "Unread messages: 4" [ref=f22e50] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f22e52]: notifications
+              - tooltip [aria-hidden] [ref=f22e54]: Messages
+            - generic: "4"
+      - generic [ref=f22e56]:
+        - button "Google apps" [ref=f22e60] [cursor=pointer]
+        - 'button "Google Account: 赤҉ Kenokardia (hasmunandar660@gmail.com)" [ref=f22e66] [cursor=pointer]'
+  - dialog "navigational drawer" [ref=f22e72]:
+    - navigation "Primary" [ref=f22e75]:
+      - button "Search property" [ref=f22e79] [cursor=pointer]:
+        - img "favicon" [ref=f22e81]
+        - combobox "https://mauppg.biz.id/" [ref=f22e89]
+        - generic [aria-hidden] [ref=f22e90]: 
+      - generic [ref=f22e91]:
+        - generic [ref=f22e92]:
+          - generic [ref=f22e93]:
+            - link "Overview" [ref=f22e95] [cursor=pointer]:
+              - /url: ./search-console?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f22e97]: home
+            - link "Insights" [ref=f22e102] [cursor=pointer]:
+              - /url: ./search-console/performance/insights?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f22e104]: lightbulb_2
+            - generic [ref=f22e112]:
+              - link "Performance" [ref=f22e115] [cursor=pointer]:
+                - /url: ./search-console/performance/search-analytics?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f22e117]: trending_up
+              - button "Performance report section" [ref=f22e121] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f22e123]: keyboard_arrow_down
+            - button "URL inspection" [ref=f22e125] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f22e127]: search
+          - generic [ref=f22e133]:
+            - generic [ref=f22e135]:
+              - generic [ref=f22e136]: Indexing
+              - button "Indexing report section" [expanded] [ref=f22e140] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f22e142]: keyboard_arrow_up
+            - generic [ref=f22e146]:
+              - link "Pages" [ref=f22e148] [cursor=pointer]:
+                - /url: ./search-console/index?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f22e150]: file_copy
+              - link "Sitemaps" [ref=f22e155] [cursor=pointer]:
+                - /url: ./search-console/sitemaps?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f22e157]: account_tree
+              - link "Removals" [ref=f22e162] [cursor=pointer]:
+                - /url: ./search-console/removals?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f22e164]: visibility_off
+          - generic [ref=f22e170]:
+            - generic [ref=f22e172]:
+              - generic [ref=f22e173]: Experience
+              - button "Experience report section" [expanded] [ref=f22e177] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f22e179]: keyboard_arrow_up
+            - generic [ref=f22e183]:
+              - link "Core Web Vitals" [ref=f22e185] [cursor=pointer]:
+                - /url: ./search-console/core-web-vitals?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f22e187]: speed
+              - link "HTTPS" [ref=f22e192] [cursor=pointer]:
+                - /url: ./search-console/https?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f22e194]: lock
+          - generic [ref=f22e200]:
+            - generic [ref=f22e202]:
+              - generic [ref=f22e203]: Enhancements
+              - button "Enhancements report section" [expanded] [ref=f22e207] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f22e209]: keyboard_arrow_up
+            - link "Review snippets" [ref=f22e215] [cursor=pointer]:
+              - /url: ./search-console/r/review-snippet?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f22e217]: layers
+          - generic [ref=f22e225]:
+            - generic [ref=f22e226]: Security & Manual Actions
+            - button "Security & Manual Actions report section" [ref=f22e230] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f22e232]: keyboard_arrow_down
+          - generic [ref=f22e233]:
+            - link "Links report" [ref=f22e235] [cursor=pointer]:
+              - /url: ./search-console/links?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f22e237]: link_2
+              - generic [ref=f22e238]: Links
+            - link "Achievements" [ref=f22e242] [cursor=pointer]:
+              - /url: ./search-console/achievements?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f22e244]: trophy
+            - link "Settings" [ref=f22e249] [cursor=pointer]:
+              - /url: ./search-console/settings?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f22e251]: settings
+        - generic [ref=f22e255]:
+          - generic [ref=f22e257]:
+            - button "Submit feedback" [ref=f22e259] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f22e261]: feedback
+            - button "About Search Console" [ref=f22e266] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f22e268]: info
+          - generic [ref=f22e274]:
+            - link "Privacy" [ref=f22e275] [cursor=pointer]:
+              - /url: https://myaccount.google.com/privacypolicy?hl=en
+            - link "Terms" [ref=f22e276] [cursor=pointer]:
+              - /url: https://myaccount.google.com/termsofservice?hl=en
+  - generic [ref=f22e278]:
+    - navigation "Breadcrumbs" [ref=f22e283]:
+      - heading "Sitemaps" [level=1] [ref=f22e286]
+    - main [ref=f22e290]:
+      - generic [ref=f22e293]:
+        - generic [ref=f22e294]: Add a new sitemap
+        - generic [ref=f22e295]:
+          - generic [ref=f22e296]:
+            - generic [ref=f22e297]: https://mauppg.biz.id/
+            - generic [ref=f22e302]:
+              - textbox "Enter sitemap URL" [ref=f22e303]
+              - generic [aria-hidden]: Enter sitemap URL
+          - button "Submit" [disabled] [ref=f22e306]
+      - generic [ref=f22e313]:
+        - generic [ref=f22e314]:
+          - heading "Submitted sitemaps" [level=1] [ref=f22e315]
+          - button "Filter table rows" [ref=f22e319] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f22e322]: 
+        - table [ref=f22e324]:
+          - rowgroup [ref=f22e325]:
+            - row [ref=f22e326]:
+              - columnheader "Sitemap" [ref=f22e327]:
+                - text: Sitemap
+                - generic [aria-hidden] [ref=f22e328] [cursor=pointer]
+              - columnheader "Type" [ref=f22e331]:
+                - text: Type
+                - generic [aria-hidden] [ref=f22e332] [cursor=pointer]
+              - columnheader "Submitted" [ref=f22e335]:
+                - text: Submitted
+                - generic [aria-hidden] [ref=f22e336] [cursor=pointer]
+              - columnheader "Last read" [ref=f22e339]:
+                - text: Last read
+                - generic [aria-hidden] [ref=f22e340] [cursor=pointer]
+              - columnheader "Status" [ref=f22e343]:
+                - text: Status
+                - generic [aria-hidden] [ref=f22e344] [cursor=pointer]
+              - columnheader "Discovered pages" [ref=f22e347]:
+                - generic [aria-hidden] [ref=f22e348] [cursor=pointer]
+                - text: Discovered pages
+              - columnheader "Discovered videos" [ref=f22e351]:
+                - generic [aria-hidden] [ref=f22e352] [cursor=pointer]
+                - text: Discovered videos
+              - columnheader [ref=f22e355]
+          - rowgroup [ref=f22e356]:
+            - row [ref=f22e357] [cursor=pointer]:
+              - cell "/sitemap.xml" [ref=f22e358]
+              - cell "Sitemap" [ref=f22e359]
+              - cell "Aug 25, 2026" [ref=f22e360]
+              - cell "Oct 19, 2026" [ref=f22e361]
+              - cell "Success" [ref=f22e362]
+              - cell "7" [ref=f22e364]
+              - cell "0" [ref=f22e365]
+              - cell [ref=f22e366]:
+                - button [ref=f22e368]:
+                  - generic [aria-hidden] [ref=f22e371]: 
+        - generic [ref=f22e374]:
+          - generic [ref=f22e376]:
+            - generic [ref=f22e377]: "Rows per page:"
+            - listbox "Number of rows per page" [ref=f22e378] [cursor=pointer]:
+              - option "5"
+              - option "10" [selected] [ref=f22e379]
+              - option "25"
+              - option "50"
+              - option "100"
+              - option "250"
+              - option "500"
+          - generic [ref=f22e380]:
+            - generic [ref=f22e381]: 1-1 of 1
+            - generic [ref=f22e382]:
+              - generic [aria-hidden] [ref=f22e384]: 
+              - generic [aria-hidden] [ref=f22e386]: 

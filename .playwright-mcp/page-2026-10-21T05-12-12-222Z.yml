@@ -1,0 +1,172 @@
+- generic [ref=f34e2]:
+  - banner [ref=f34e4]:
+    - generic [ref=f34e5]:
+      - generic [ref=f34e6]:
+        - button "Main menu" [ref=f34e7] [cursor=pointer]
+        - link "Google Search Console" [ref=f34e12] [cursor=pointer]:
+          - /url: ./search-console?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+      - generic [ref=f34e14]:
+        - search [ref=f34e16]:
+          - generic [ref=f34e22]:
+            - textbox [disabled] [aria-hidden] [ref=f34e23]: Inspect any URL in "https://spinclass.mauppg.biz.id/"
+            - combobox "Inspect any URL in https://spinclass.mauppg.biz.id/" [ref=f34e24]
+          - button "Search" [ref=f34e25] [cursor=pointer]
+        - generic [ref=f34e29]:
+          - generic [ref=f34e31]:
+            - generic [ref=f34e33]:
+              - button "Help" [ref=f34e34] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f34e36]: help_outline
+              - tooltip [aria-hidden] [ref=f34e38]: Help
+            - generic [ref=f34e40]:
+              - button "User settings" [ref=f34e41] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f34e43]: manage_accounts
+              - tooltip [aria-hidden] [ref=f34e45]: User settings
+          - generic [ref=f34e48]:
+            - generic [ref=f34e49]:
+              - 'button "Unread messages: 1" [ref=f34e50] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f34e52]: notifications
+              - tooltip [aria-hidden] [ref=f34e54]: Messages
+            - generic: "1"
+      - generic [ref=f34e56]:
+        - button "Google apps" [ref=f34e60] [cursor=pointer]
+        - 'button "Google Account: 赤҉ Kenokardia (hasmunandar660@gmail.com)" [ref=f34e66] [cursor=pointer]'
+  - dialog "navigational drawer" [ref=f34e72]:
+    - navigation "Primary" [ref=f34e75]:
+      - button "Search property" [ref=f34e79] [cursor=pointer]:
+        - img "favicon" [ref=f34e81]
+        - combobox "https://spinclass.mauppg.biz.id/" [ref=f34e89]
+        - generic [aria-hidden] [ref=f34e90]: 
+      - generic [ref=f34e91]:
+        - generic [ref=f34e92]:
+          - generic [ref=f34e93]:
+            - link "Overview" [ref=f34e95] [cursor=pointer]:
+              - /url: ./search-console?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f34e97]: home
+            - link "Insights" [ref=f34e102] [cursor=pointer]:
+              - /url: ./search-console/performance/insights?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f34e104]: lightbulb_2
+            - link "Performance" [ref=f34e109] [cursor=pointer]:
+              - /url: ./search-console/performance/search-analytics?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f34e111]: trending_up
+            - button "URL inspection" [ref=f34e116] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f34e118]: search
+          - generic [ref=f34e124]:
+            - generic [ref=f34e126]:
+              - generic [ref=f34e127]: Indexing
+              - button "Indexing report section" [expanded] [ref=f34e131] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f34e133]: keyboard_arrow_up
+            - generic [ref=f34e137]:
+              - link "Pages" [ref=f34e139] [cursor=pointer]:
+                - /url: ./search-console/index?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f34e141]: file_copy
+              - link "Sitemaps" [ref=f34e146] [cursor=pointer]:
+                - /url: ./search-console/sitemaps?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f34e148]: account_tree
+              - link "Removals" [ref=f34e153] [cursor=pointer]:
+                - /url: ./search-console/removals?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f34e155]: visibility_off
+          - generic [ref=f34e161]:
+            - generic [ref=f34e163]:
+              - generic [ref=f34e164]: Experience
+              - button "Experience report section" [expanded] [ref=f34e168] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f34e170]: keyboard_arrow_up
+            - link "Core Web Vitals" [ref=f34e176] [cursor=pointer]:
+              - /url: ./search-console/core-web-vitals?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f34e178]: speed
+          - generic [ref=f34e186]:
+            - generic [ref=f34e187]: Security & Manual Actions
+            - button "Security & Manual Actions report section" [ref=f34e191] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f34e193]: keyboard_arrow_down
+          - generic [ref=f34e194]:
+            - link "Links report" [ref=f34e196] [cursor=pointer]:
+              - /url: ./search-console/links?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f34e198]: link_2
+              - generic [ref=f34e199]: Links
+            - link "Achievements" [ref=f34e203] [cursor=pointer]:
+              - /url: ./search-console/achievements?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f34e205]: trophy
+            - link "Settings" [ref=f34e210] [cursor=pointer]:
+              - /url: ./search-console/settings?resource_id=https%3A%2F%2Fspinclass.mauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f34e212]: settings
+        - generic [ref=f34e216]:
+          - generic [ref=f34e218]:
+            - button "Submit feedback" [ref=f34e220] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f34e222]: feedback
+            - button "About Search Console" [ref=f34e227] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f34e229]: info
+          - generic [ref=f34e235]:
+            - link "Privacy" [ref=f34e236] [cursor=pointer]:
+              - /url: https://myaccount.google.com/privacypolicy?hl=en
+            - link "Terms" [ref=f34e237] [cursor=pointer]:
+              - /url: https://myaccount.google.com/termsofservice?hl=en
+  - generic [ref=f34e239]:
+    - navigation "Breadcrumbs" [ref=f34e244]:
+      - heading "Sitemaps" [level=1] [ref=f34e247]
+    - main [ref=f34e251]:
+      - generic [ref=f34e254]:
+        - generic [ref=f34e255]: Add a new sitemap
+        - generic [ref=f34e256]:
+          - generic [ref=f34e257]:
+            - generic [ref=f34e258]: https://spinclass.mauppg.biz.id/
+            - generic [ref=f34e263]:
+              - textbox "Enter sitemap URL" [ref=f34e264]
+              - generic [aria-hidden]: Enter sitemap URL
+          - button "Submit" [disabled] [ref=f34e267]
+      - generic [ref=f34e274]:
+        - generic [ref=f34e275]:
+          - heading "Submitted sitemaps" [level=1] [ref=f34e276]
+          - button "Filter table rows" [ref=f34e280] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f34e283]: 
+        - table [ref=f34e285]:
+          - rowgroup [ref=f34e286]:
+            - row [ref=f34e287]:
+              - columnheader "Sitemap" [ref=f34e288]:
+                - text: Sitemap
+                - generic [aria-hidden] [ref=f34e289] [cursor=pointer]
+              - columnheader "Type" [ref=f34e292]:
+                - text: Type
+                - generic [aria-hidden] [ref=f34e293] [cursor=pointer]
+              - columnheader "Submitted" [ref=f34e296]:
+                - text: Submitted
+                - generic [aria-hidden] [ref=f34e297] [cursor=pointer]
+              - columnheader "Last read" [ref=f34e300]:
+                - text: Last read
+                - generic [aria-hidden] [ref=f34e301] [cursor=pointer]
+              - columnheader "Status" [ref=f34e304]:
+                - text: Status
+                - generic [aria-hidden] [ref=f34e305] [cursor=pointer]
+              - columnheader "Discovered pages" [ref=f34e308]:
+                - generic [aria-hidden] [ref=f34e309] [cursor=pointer]
+                - text: Discovered pages
+              - columnheader "Discovered videos" [ref=f34e312]:
+                - generic [aria-hidden] [ref=f34e313] [cursor=pointer]
+                - text: Discovered videos
+              - columnheader [ref=f34e316]
+          - rowgroup [ref=f34e317]:
+            - row [ref=f34e318] [cursor=pointer]:
+              - cell "/sitemap.xml" [ref=f34e319]
+              - cell "Sitemap" [ref=f34e320]
+              - cell "Oct 21, 2026" [ref=f34e321]
+              - cell "Oct 21, 2026" [ref=f34e322]
+              - cell "Success" [ref=f34e323]
+              - cell "1" [ref=f34e325]
+              - cell "0" [ref=f34e326]
+              - cell [ref=f34e327]:
+                - button [ref=f34e329]:
+                  - generic [aria-hidden] [ref=f34e332]: 
+        - generic [ref=f34e335]:
+          - generic [ref=f34e337]:
+            - generic [ref=f34e338]: "Rows per page:"
+            - listbox "Number of rows per page" [ref=f34e339] [cursor=pointer]:
+              - option "5"
+              - option "10" [selected] [ref=f34e340]
+              - option "25"
+              - option "50"
+              - option "100"
+              - option "250"
+              - option "500"
+          - generic [ref=f34e341]:
+            - generic [ref=f34e342]: 1-1 of 1
+            - generic [ref=f34e343]:
+              - generic [aria-hidden] [ref=f34e345]: 
+              - generic [aria-hidden] [ref=f34e347]: 

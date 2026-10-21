@@ -1,0 +1,50 @@
+- generic [ref=f26e2]:
+  - banner [ref=f26e4]:
+    - generic [ref=f26e5]:
+      - generic [ref=f26e6]:
+        - button "Main menu" [ref=f26e7] [cursor=pointer]
+        - link "Google Search Console" [ref=f26e12] [cursor=pointer]:
+          - /url: ./search-console
+      - generic [ref=f26e17]:
+        - generic [ref=f26e19]:
+          - button "Help" [ref=f26e20] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f26e22]: help_outline
+          - tooltip [aria-hidden] [ref=f26e24]: Help
+        - generic [ref=f26e26]:
+          - button "User settings" [ref=f26e27] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f26e29]: manage_accounts
+          - tooltip [aria-hidden] [ref=f26e31]: User settings
+      - generic [ref=f26e33]:
+        - button "Google apps" [ref=f26e37] [cursor=pointer]
+        - 'button "Google Account: 赤҉ Kenokardia (hasmunandar660@gmail.com)" [ref=f26e43] [cursor=pointer]'
+  - dialog "navigational drawer" [ref=f26e49]:
+    - navigation "Primary" [ref=f26e52]:
+      - button "Search property" [ref=f26e56] [cursor=pointer]:
+        - generic [ref=f26e63]:
+          - combobox "Search property" [ref=f26e64]
+          - generic [aria-hidden]: Search property
+        - generic [aria-hidden] [ref=f26e65]: 
+      - generic [ref=f26e67]:
+        - generic [ref=f26e69]:
+          - button "Submit feedback" [ref=f26e71] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f26e73]: feedback
+          - button "About Search Console" [ref=f26e78] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f26e80]: info
+        - generic [ref=f26e86]:
+          - link "Privacy" [ref=f26e87] [cursor=pointer]:
+            - /url: https://myaccount.google.com/privacypolicy?hl=en
+          - link "Terms" [ref=f26e88] [cursor=pointer]:
+            - /url: https://myaccount.google.com/termsofservice?hl=en
+  - generic [ref=f26e91]:
+    - generic [aria-hidden] [ref=f26e93]: 
+    - generic [ref=f26e94]: Oops, you don't have access to this property
+    - generic [ref=f26e95]:
+      - generic [ref=f26e96]:
+        - text: "Signed in as:"
+        - generic [ref=f26e97]: hasmunandar660@gmail.com
+      - generic [ref=f26e98]:
+        - text: "Property:"
+        - generic [ref=f26e99]: mauppg.biz.id
+      - generic [ref=f26e100]: Sign in with an account that can access this property, or request access from a property owner.
+      - generic [ref=f26e101]: Otherwise
+      - button "Verify your ownership" [ref=f26e103] [cursor=pointer]

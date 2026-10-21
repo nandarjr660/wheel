@@ -1,0 +1,254 @@
+- generic [ref=f18e2]:
+  - banner [ref=f18e4]:
+    - generic [ref=f18e5]:
+      - generic [ref=f18e6]:
+        - button "Main menu" [ref=f18e7] [cursor=pointer]
+        - link "Google Search Console" [ref=f18e12] [cursor=pointer]:
+          - /url: ./search-console?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+      - generic [ref=f18e14]:
+        - search [ref=f18e16]:
+          - generic [ref=f18e22]:
+            - textbox [disabled] [aria-hidden] [ref=f18e23]: Inspect any URL in "https://mauppg.biz.id/"
+            - combobox "Inspect any URL in https://mauppg.biz.id/" [ref=f18e24]
+          - button "Search" [ref=f18e25] [cursor=pointer]
+        - generic [ref=f18e29]:
+          - generic [ref=f18e31]:
+            - generic [ref=f18e33]:
+              - button "Help" [ref=f18e34] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f18e36]: help_outline
+              - tooltip [aria-hidden] [ref=f18e38]: Help
+            - generic [ref=f18e40]:
+              - button "User settings" [ref=f18e41] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f18e43]: manage_accounts
+              - tooltip [aria-hidden] [ref=f18e45]: User settings
+          - generic [ref=f18e48]:
+            - generic [ref=f18e49]:
+              - 'button "Unread messages: 4" [ref=f18e50] [cursor=pointer]':
+                - generic [aria-hidden] [ref=f18e52]: notifications
+              - tooltip [aria-hidden] [ref=f18e54]: Messages
+            - generic: "4"
+      - generic [ref=f18e56]:
+        - button "Google apps" [ref=f18e60] [cursor=pointer]
+        - 'button "Google Account: 赤҉ Kenokardia (hasmunandar660@gmail.com)" [ref=f18e66] [cursor=pointer]'
+  - dialog "navigational drawer" [ref=f18e72]:
+    - navigation "Primary" [ref=f18e75]:
+      - button "Search property" [ref=f18e79] [cursor=pointer]:
+        - img "favicon" [ref=f18e81]
+        - combobox "https://mauppg.biz.id/" [ref=f18e89]
+        - generic [aria-hidden] [ref=f18e90]: 
+      - generic [ref=f18e91]:
+        - generic [ref=f18e92]:
+          - generic [ref=f18e93]:
+            - link "Overview" [ref=f18e95] [cursor=pointer]:
+              - /url: ./search-console?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f18e97]: home
+            - link "Insights" [ref=f18e102] [cursor=pointer]:
+              - /url: ./search-console/performance/insights?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f18e104]: lightbulb_2
+            - generic [ref=f18e112]:
+              - link "Performance" [ref=f18e115] [cursor=pointer]:
+                - /url: ./search-console/performance/search-analytics?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f18e117]: trending_up
+              - button "Performance report section" [ref=f18e121] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f18e123]: keyboard_arrow_down
+            - button "URL inspection" [ref=f18e125] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f18e127]: search
+          - generic [ref=f18e133]:
+            - generic [ref=f18e135]:
+              - generic [ref=f18e136]: Indexing
+              - button "Indexing report section" [expanded] [ref=f18e140] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f18e142]: keyboard_arrow_up
+            - generic [ref=f18e146]:
+              - link "Pages" [ref=f18e148] [cursor=pointer]:
+                - /url: ./search-console/index?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f18e150]: file_copy
+              - link "Sitemaps" [ref=f18e155] [cursor=pointer]:
+                - /url: ./search-console/sitemaps?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f18e157]: account_tree
+              - link "Removals" [ref=f18e162] [cursor=pointer]:
+                - /url: ./search-console/removals?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f18e164]: visibility_off
+          - generic [ref=f18e170]:
+            - generic [ref=f18e172]:
+              - generic [ref=f18e173]: Experience
+              - button "Experience report section" [expanded] [ref=f18e177] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f18e179]: keyboard_arrow_up
+            - generic [ref=f18e183]:
+              - link "Core Web Vitals" [ref=f18e185] [cursor=pointer]:
+                - /url: ./search-console/core-web-vitals?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f18e187]: speed
+              - link "HTTPS" [ref=f18e192] [cursor=pointer]:
+                - /url: ./search-console/https?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+                - generic [aria-hidden] [ref=f18e194]: lock
+          - generic [ref=f18e200]:
+            - generic [ref=f18e202]:
+              - generic [ref=f18e203]: Enhancements
+              - button "Enhancements report section" [expanded] [ref=f18e207] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f18e209]: keyboard_arrow_up
+            - link "Review snippets" [ref=f18e215] [cursor=pointer]:
+              - /url: ./search-console/r/review-snippet?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f18e217]: layers
+          - generic [ref=f18e225]:
+            - generic [ref=f18e226]: Security & Manual Actions
+            - button "Security & Manual Actions report section" [ref=f18e230] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f18e232]: keyboard_arrow_down
+          - generic [ref=f18e233]:
+            - link "Links report" [ref=f18e235] [cursor=pointer]:
+              - /url: ./search-console/links?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f18e237]: link_2
+              - generic [ref=f18e238]: Links
+            - link "Achievements" [ref=f18e242] [cursor=pointer]:
+              - /url: ./search-console/achievements?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f18e244]: trophy
+            - link "Settings" [ref=f18e249] [cursor=pointer]:
+              - /url: ./search-console/settings?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+              - generic [aria-hidden] [ref=f18e251]: settings
+        - generic [ref=f18e255]:
+          - generic [ref=f18e257]:
+            - button "Submit feedback" [ref=f18e259] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f18e261]: feedback
+            - button "About Search Console" [ref=f18e266] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f18e268]: info
+          - generic [ref=f18e274]:
+            - link "Privacy" [ref=f18e275] [cursor=pointer]:
+              - /url: https://myaccount.google.com/privacypolicy?hl=en
+            - link "Terms" [ref=f18e276] [cursor=pointer]:
+              - /url: https://myaccount.google.com/termsofservice?hl=en
+  - generic [ref=f18e278]:
+    - navigation "Breadcrumbs" [ref=f18e283]:
+      - heading "Overview" [level=1] [ref=f18e286]
+    - main [ref=f18e290]:
+      - generic [ref=f18e291]:
+        - generic [ref=f18e296]:
+          - generic [ref=f18e297]:
+            - generic [aria-hidden] [ref=f18e298]: lightbulb_outline
+            - generic [ref=f18e299]: Get insights into your site's Search performance
+          - generic [ref=f18e302]:
+            - generic [aria-hidden] [ref=f18e304]: chevron_right
+            - generic [aria-hidden] [ref=f18e305]: Explore your insights
+            - link "Explore your insights" [ref=f18e306] [cursor=pointer]:
+              - /url: ./search-console/performance/insights?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+        - generic [ref=f18e308]:
+          - generic [ref=f18e309]:
+            - generic [ref=f18e310]: Performance
+            - generic [ref=f18e313]:
+              - generic [aria-hidden] [ref=f18e315]: chevron_right
+              - generic [aria-hidden] [ref=f18e316]: Full report
+              - link "Full report" [ref=f18e317] [cursor=pointer]:
+                - /url: ./search-console/performance/search-analytics?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+          - generic [ref=f18e320]:
+            - generic [ref=f18e321]: 2 total web search clicks
+            - img [aria-hidden] [ref=f18e329]:
+              - generic [ref=f18e330]:
+                - generic [ref=f18e331]:
+                  - generic [ref=f18e332]: 8/24/26
+                  - generic [ref=f18e334]: 8/31/26
+                  - generic [ref=f18e336]: 9/7/26
+                  - generic [ref=f18e338]: 9/14/26
+                  - generic [ref=f18e340]: 9/21/26
+                  - generic [ref=f18e342]: 9/28/26
+                  - generic [ref=f18e344]: 10/5/26
+                  - generic [ref=f18e346]: 10/12/26
+                - generic [ref=f18e348]:
+                  - generic [ref=f18e349]: "3"
+                  - generic [ref=f18e351]: "2"
+                  - generic [ref=f18e353]: "1"
+                  - generic [ref=f18e355]: "0"
+        - generic [ref=f18e365]:
+          - generic [ref=f18e366]:
+            - generic [ref=f18e367]: Indexing
+            - generic [ref=f18e370]:
+              - generic [aria-hidden] [ref=f18e372]: chevron_right
+              - generic [aria-hidden] [ref=f18e373]: Full report
+              - link "Full report" [ref=f18e374] [cursor=pointer]:
+                - /url: ./search-console/index?resource_id=https%3A%2F%2Fmauppg.biz.id%2F
+          - generic [ref=f18e377]:
+            - generic [ref=f18e379]:
+              - generic [ref=f18e380]: 3 not indexed pages
+              - generic [ref=f18e383]: 5 indexed pages
+            - img [aria-hidden] [ref=f18e389]:
+              - generic [ref=f18e390]:
+                - generic [ref=f18e391]:
+                  - generic [ref=f18e392]: 7/23/26
+                  - generic [ref=f18e394]: 8/2/26
+                  - generic [ref=f18e396]: 8/12/26
+                  - generic [ref=f18e398]: 8/22/26
+                  - generic [ref=f18e400]: 9/1/26
+                  - generic [ref=f18e402]: 9/11/26
+                  - generic [ref=f18e404]: 9/21/26
+                  - generic [ref=f18e406]: 10/1/26
+                  - generic [ref=f18e408]: 10/11/26
+                - generic [ref=f18e410]:
+                  - generic [ref=f18e411]: "6"
+                  - generic [ref=f18e413]: "4"
+                  - generic [ref=f18e415]: "2"
+                  - generic [ref=f18e417]: "0"
+        - generic [ref=f18e436]:
+          - generic [ref=f18e437]: Experience
+          - table [ref=f18e442]:
+            - rowgroup [ref=f18e443]:
+              - row [ref=f18e444]:
+                - columnheader "Type" [ref=f18e445]
+                - columnheader [ref=f18e446]
+                - columnheader "Good" [ref=f18e447]
+                - columnheader "Needs improvement" [ref=f18e448]
+                - columnheader "Poor" [ref=f18e449]
+                - columnheader "Trend" [ref=f18e450]
+                - columnheader [ref=f18e451]
+            - rowgroup [ref=f18e452]:
+              - row [ref=f18e453]:
+                - cell "Core Web Vitals" [ref=f18e454]
+                - cell "Mobile Desktop" [ref=f18e457]:
+                  - generic [ref=f18e459]:
+                    - generic [ref=f18e460]: Mobile
+                    - generic [ref=f18e461]: Desktop
+                - cell "No data No data" [ref=f18e462]:
+                  - generic [ref=f18e463]:
+                    - generic [ref=f18e464]: No data
+                    - generic [ref=f18e465]: No data
+                - cell "No data No data" [ref=f18e466]:
+                  - generic [ref=f18e467]:
+                    - generic [ref=f18e468]: No data
+                    - generic [ref=f18e469]: No data
+                - cell "No data No data" [ref=f18e470]:
+                  - generic [ref=f18e471]:
+                    - generic [ref=f18e472]: No data
+                    - generic [ref=f18e473]: No data
+                - cell [ref=f18e474]
+              - row [ref=f18e475]:
+                - columnheader [ref=f18e476]
+                - columnheader [ref=f18e477]
+                - columnheader "HTTPS" [ref=f18e478]
+                - columnheader [ref=f18e479]
+                - columnheader "Non HTTPS" [ref=f18e480]
+                - columnheader [ref=f18e481]
+                - columnheader [ref=f18e482]
+              - row [ref=f18e483]:
+                - cell "HTTPS" [ref=f18e484]
+                - cell [ref=f18e487]
+                - cell "5" [ref=f18e488]
+                - cell [ref=f18e491]
+                - cell "0" [ref=f18e492]
+                - cell [ref=f18e495]
+                - cell [ref=f18e500]:
+                  - button "Open report" [ref=f18e503] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f18e504]: chevron_right
+        - generic [ref=f18e506]:
+          - generic [ref=f18e507]: Enhancements
+          - table [ref=f18e512]:
+            - rowgroup [ref=f18e513]:
+              - row [ref=f18e514]:
+                - columnheader "Type" [ref=f18e515]
+                - columnheader "Valid" [ref=f18e516]
+                - columnheader "Invalid" [ref=f18e517]
+                - columnheader "Trend" [ref=f18e518]
+                - columnheader [ref=f18e519]
+            - rowgroup [ref=f18e520]:
+              - row [ref=f18e521]:
+                - cell "Review snippets" [ref=f18e522]
+                - cell "1" [ref=f18e525]
+                - cell "0" [ref=f18e528]
+                - cell [ref=f18e531]
+                - cell [ref=f18e536]:
+                  - button "Open report" [ref=f18e539] [cursor=pointer]:
+                    - generic [aria-hidden] [ref=f18e540]: chevron_right
