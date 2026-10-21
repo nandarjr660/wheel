@@ -23,10 +23,10 @@
 
 ## Halaman Utama
 
-- [Beranda](/) — Aplikasi spinner kelas interaktif
-- [Cara Pakai](/#cara-pakai) — Panduan langkah demi langkah
-- [Fitur](/#fitur) — Daftar fitur lengkap
-- [FAQ](/#faq) — Pertanyaan yang sering diajukan
+- [Beranda](https://spinclass.mauppg.biz.id/) — Aplikasi spinner kelas interaktif
+- [Cara Pakai](https://spinclass.mauppg.biz.id/#cara-pakai) — Panduan langkah demi langkah
+- [Fitur](https://spinclass.mauppg.biz.id/#fitur) — Daftar fitur lengkap
+- [FAQ](https://spinclass.mauppg.biz.id/#faq) — Pertanyaan yang sering diajukan
 
 ## Tech Stack
 

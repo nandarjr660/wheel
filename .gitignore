@@ -15,3 +15,6 @@ reports/
 progress.*
 *-report.*
 analysis/
+
+.vercel
+.env*

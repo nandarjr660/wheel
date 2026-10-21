@@ -1,0 +1,173 @@
+- generic [ref=f10e2]:
+  - banner [ref=f10e3]:
+    - generic [ref=f10e4]:
+      - generic [ref=f10e6]: SpinClass
+      - generic [ref=f10e7]: Smart Classroom AI Edition
+    - navigation "Navigasi halaman" [ref=f10e8]:
+      - link "Cara Menggunakan" [ref=f10e9] [cursor=pointer]:
+        - /url: "#cara-pakai"
+      - link "Fitur Unggulan" [ref=f10e10] [cursor=pointer]:
+        - /url: "#fitur"
+      - link "Pertanyaan Umum (FAQ)" [ref=f10e11] [cursor=pointer]:
+        - /url: "#faq"
+    - generic [ref=f10e12]:
+      - button "Switch to English" [ref=f10e13] [cursor=pointer]: ID
+      - button "Tema Gelap" [ref=f10e14] [cursor=pointer]
+  - main [ref=f10e17]:
+    - generic [ref=f10e18]:
+      - generic [ref=f10e19]:
+        - region [ref=f10e20]:
+          - generic [ref=f10e21]:
+            - generic [ref=f10e22]: "01"
+            - heading "Setup Materi" [level=2] [ref=f10e23]
+          - generic [ref=f10e24]:
+            - generic [ref=f10e25]: Topik Materi
+            - textbox "Topik Materi" [ref=f10e26]:
+              - /placeholder: "Contoh: Fotosintesis"
+          - generic [ref=f10e27]:
+            - generic [ref=f10e28]:
+              - generic [ref=f10e29]: Jenjang
+              - combobox "Jenjang" [ref=f10e30] [cursor=pointer]:
+                - option "SD"
+                - option "SMP"
+                - option "SMA/SMK" [selected]
+                - option "Universitas"
+            - generic [ref=f10e31]:
+              - generic [ref=f10e32]: Kelas/Smt
+              - combobox "Kelas/Smt" [ref=f10e33] [cursor=pointer]:
+                - option "X" [selected]
+                - option "XI"
+                - option "XII"
+          - generic [ref=f10e34]:
+            - generic [ref=f10e35]:
+              - text: Tantangan AI
+              - generic [ref=f10e36]:
+                - generic [ref=f10e37] [cursor=pointer]: "?"
+                - generic [ref=f10e38]: "ON: AI membuat soal untuk siswa terpilih. OFF:: hanya menampilkan nama pemenang"
+            - switch "Nonaktifkan tantangan AI" [checked] [ref=f10e39] [cursor=pointer]
+        - region [ref=f10e41]:
+          - generic [ref=f10e42]:
+            - generic [ref=f10e43]: "02"
+            - heading "Daftar Siswa" [level=2] [ref=f10e44]
+          - generic [ref=f10e45]:
+            - generic [ref=f10e46]: Siswa Aktif
+            - textbox "Siswa Aktif" [ref=f10e47]:
+              - /placeholder: Andi, Budi, Citra...
+              - text: Andi, Budi, Siti, Dewi, Eko, Farhan, Gita
+          - button "UPDATE RODA" [ref=f10e48] [cursor=pointer]
+      - region "Roda keberuntungan dengan 7 siswa" [ref=f10e54]:
+        - generic [ref=f10e55]:
+          - generic [ref=f10e56]: 01 · Setup Materi
+          - generic [ref=f10e57]: "7"
+        - generic "Roda keberuntungan dengan 7 siswa" [ref=f10e60]
+        - button "PUTAR!" [ref=f10e61] [cursor=pointer]:
+          - text: PUTAR!
+          - generic [ref=f10e62]: →
+  - region [ref=f10e63]:
+    - generic [ref=f10e64]:
+      - paragraph [ref=f10e65]: Workbench 01
+      - heading "Cara Menggunakan" [level=2] [ref=f10e66]
+      - paragraph [ref=f10e67]: Rata-rata guru menghemat 15 menit per sesi kelas dengan menggunakan roda keberuntungan digital dibanding metode manual. Sebuah studi tahun 2025 menunjukkan bahwa penggunaan gamifikasi dalam pendidikan meningkatkan partisipasi siswa hingga 67%.
+      - list [ref=f10e68]:
+        - listitem [ref=f10e69]:
+          - generic [ref=f10e70]: "01"
+          - generic [ref=f10e71]:
+            - heading "Input Nama Siswa" [level=3] [ref=f10e72]
+            - paragraph [ref=f10e73]: "Masukkan nama-nama siswa dipisahkan dengan koma pada kolom \"Daftar Siswa\". Contoh: Andi, Budi, Siti, Dewi."
+        - listitem [ref=f10e74]:
+          - generic [ref=f10e75]: "02"
+          - generic [ref=f10e76]:
+            - heading "Setup Materi" [level=3] [ref=f10e77]
+            - paragraph [ref=f10e78]: Masukkan topik materi pelajaran, pilih jenjang (SD/SMP/SMA/Universitas), dan tentukan kelas atau semester.
+        - listitem [ref=f10e79]:
+          - generic [ref=f10e80]: "03"
+          - generic [ref=f10e81]:
+            - heading "Aktifkan AI Challenge" [level=3] [ref=f10e82]
+            - paragraph [ref=f10e83]: Aktifkan toggle "Tantangan AI" jika ingin siswa yang terpilih mendapatkan soal dari AI. Nonaktifkan jika hanya ingin menampilkan nama pemenang.
+        - listitem [ref=f10e84]:
+          - generic [ref=f10e85]: "04"
+          - generic [ref=f10e86]:
+            - heading "Putar Roda" [level=3] [ref=f10e87]
+            - paragraph [ref=f10e88]: Klik tombol "PUTAR!" untuk memutar roda. Tunggu hingga roda berhenti dan pemenang ditampilkan dengan confetti.
+        - listitem [ref=f10e89]:
+          - generic [ref=f10e90]: "05"
+          - generic [ref=f10e91]:
+            - heading "Lihat Tantangan AI" [level=3] [ref=f10e92]
+            - paragraph [ref=f10e93]: Jika AI Challenge aktif, soal tantangan akan ditampilkan. Klik "LIHAT JAWABAN" untuk melihat jawaban yang benar.
+      - blockquote [ref=f10e94]:
+        - paragraph [ref=f10e95]: “Teknologi AI dalam pendidikan bukan tentang mengganti guru, tapi memberikan alat untuk membuat pembelajaran lebih personal dan menarik bagi setiap siswa.”
+        - generic [ref=f10e96]: — Dr. Ani Yudhoyawan, pakar Teknologi Pendidikan Universitas Indonesia, 2025
+  - region [ref=f10e97]:
+    - generic [ref=f10e98]:
+      - paragraph [ref=f10e99]: Workbench 02
+      - heading "Fitur Unggulan" [level=2] [ref=f10e100]
+      - paragraph [ref=f10e101]: Tahun 2026, lebih dari 73% sekolah di Indonesia telah mengadopsi teknologi digital dalam proses belajar mengajar. Roda Keberuntungan Kelas hadir sebagai solusi gratis yang mendukung transformasi digital pendidikan dengan fitur AI-powered challenge yang personal.
+      - generic [ref=f10e102]:
+        - generic [ref=f10e105]:
+          - heading "Canvas-Rendered Wheel" [level=3] [ref=f10e106]
+          - paragraph [ref=f10e107]: Roda berputar dengan kualitas Retina/HiDPI support
+        - generic [ref=f10e110]:
+          - heading "AI-Powered Challenge" [level=3] [ref=f10e111]
+          - paragraph [ref=f10e112]: Soal otomatis menggunakan Google Gemini AI
+        - generic [ref=f10e115]:
+          - heading "Confetti Animation" [level=3] [ref=f10e116]
+          - paragraph [ref=f10e117]: Efek confetti meriah saat pemenang terpilih
+        - generic [ref=f10e120]:
+          - heading "Responsive Design" [level=3] [ref=f10e121]
+          - paragraph [ref=f10e122]: Tampilan optimal di mobile dan desktop
+        - generic [ref=f10e125]:
+          - heading "Dark & Light Mode" [level=3] [ref=f10e126]
+          - paragraph [ref=f10e127]: Theme toggle sesuai preferensi pengguna
+        - generic [ref=f10e130]:
+          - heading "Social Sharing" [level=3] [ref=f10e131]
+          - paragraph [ref=f10e132]: Share ke WhatsApp dan Facebook
+  - region [ref=f10e133]:
+    - generic [ref=f10e134]:
+      - paragraph [ref=f10e135]: Workbench 03
+      - heading "Pertanyaan Umum (FAQ)" [level=2] [ref=f10e136]
+      - paragraph [ref=f10e137]: Berdasarkan survey kepada 500 guru Indonesia tahun 2025, 89% responden menyatakan bahwa penggunaan teknologi interaktif seperti roda keberuntungan digital membantu meningkatkan fokus siswa selama pelajaran berlangsung.
+      - generic [ref=f10e138]:
+        - group [ref=f10e139]:
+          - generic "01 Apa itu Roda Keberuntungan Kelas?" [ref=f10e140] [cursor=pointer]:
+            - generic [ref=f10e141]: "01"
+            - generic [ref=f10e142]: Apa itu Roda Keberuntungan Kelas?
+        - group [ref=f10e146]:
+          - generic "02 Bagaimana cara menggunakan?" [ref=f10e147] [cursor=pointer]:
+            - generic [ref=f10e148]: "02"
+            - generic [ref=f10e149]: Bagaimana cara menggunakan?
+        - group [ref=f10e153]:
+          - generic "03 Apakah aplikasi ini gratis?" [ref=f10e154] [cursor=pointer]:
+            - generic [ref=f10e155]: "03"
+            - generic [ref=f10e156]: Apakah aplikasi ini gratis?
+        - group [ref=f10e160]:
+          - generic "04 Jenjang apa saja yang didukung?" [ref=f10e161] [cursor=pointer]:
+            - generic [ref=f10e162]: "04"
+            - generic [ref=f10e163]: Jenjang apa saja yang didukung?
+        - group [ref=f10e167]:
+          - generic "05 Bagaimana fitur AI Challenge bekerja?" [ref=f10e168] [cursor=pointer]:
+            - generic [ref=f10e169]: "05"
+            - generic [ref=f10e170]: Bagaimana fitur AI Challenge bekerja?
+      - blockquote [ref=f10e174]:
+        - paragraph [ref=f10e175]: “Pembelajaran aktif dengan elemen kejutan seperti roda keberuntungan terbukti meningkatkan retensi materi hingga 40% dibanding metode ceramah konvensional.”
+        - generic [ref=f10e176]: — Prof. Suciati, Fakultas Ilmu Pendidikan Universitas Negeri Yogyakarta, 2026
+  - contentinfo [ref=f10e177]:
+    - generic [ref=f10e179]:
+      - generic [ref=f10e180]: SpinClass ·
+      - generic [ref=f10e181]: PUTAR! ·
+      - generic [ref=f10e182]: Daftar Siswa ·
+      - generic [ref=f10e183]: Tantangan AI ·
+      - generic [ref=f10e184]: SpinClass ·
+      - generic [ref=f10e185]: PUTAR! ·
+      - generic [ref=f10e186]: Daftar Siswa ·
+      - generic [ref=f10e187]: Tantangan AI ·
+    - generic [ref=f10e188]:
+      - paragraph [ref=f10e189]: © hasmunandar
+      - link "@hsmnandar" [ref=f10e190] [cursor=pointer]:
+        - /url: https://instagram.com/hsmnandar
+  - button "Bagikan aplikasi" [ref=f10e193]
+  - generic [ref=f10e201]:
+    - heading "Selamat Datang di Roda Keberuntungan!" [level=2] [ref=f10e204]
+    - paragraph [ref=f10e205]: Jangan lupa follow Instagram kami ya
+    - link "Follow @hsmnandar" [ref=f10e206] [cursor=pointer]:
+      - /url: https://instagram.com/hsmnandar
+    - button "Lewati" [ref=f10e209] [cursor=pointer]

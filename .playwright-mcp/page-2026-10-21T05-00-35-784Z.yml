@@ -1,0 +1,272 @@
+- generic [ref=f13e1]:
+  - link "Skip to content":
+    - /url: "#geist-skip-nav"
+  - main [ref=f13e3]:
+    - generic [ref=f13e4]:
+      - generic [ref=f13e5]:
+        - generic [ref=f13e6]:
+          - generic [ref=f13e7]:
+            - generic [ref=f13e10]:
+              - link "nandarjr660's projects Hobby" [ref=f13e11] [cursor=pointer]:
+                - /url: /nandarjr660s-projects
+                - generic [ref=f13e14]:
+                  - generic [ref=f13e15]: nandarjr660's projects
+                  - generic [ref=f13e16]: Hobby
+              - button [ref=f13e18] [cursor=pointer]
+            - button "Find F" [ref=f13e23]:
+              - generic [ref=f13e25]:
+                - generic [ref=f13e29]: Find
+                - generic [ref=f13e30]: F
+          - navigation [ref=f13e34]:
+            - generic [ref=f13e38]:
+              - link "Overview" [ref=f13e39] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel
+              - link "Deployments" [ref=f13e44] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/deployments
+              - link "Logs" [ref=f13e50] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/logs
+              - link "Analytics" [ref=f13e59] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/analytics
+              - link "Speed Insights" [ref=f13e65] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/speed-insights
+              - link "Observability" [ref=f13e71] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/observability
+              - link "Firewall" [ref=f13e80] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/firewall
+              - link "CDN" [ref=f13e89] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/cdn
+              - separator [ref=f13e98]
+              - link "Environment Variables" [ref=f13e99] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/settings/environment-variables
+              - link "Domains" [ref=f13e105] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/settings/domains
+              - link "Connect" [ref=f13e111] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/connect
+              - link "Integrations" [ref=f13e120] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/settings/integrations
+              - link "Storage" [ref=f13e126] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/stores
+              - link "Flags" [ref=f13e132] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/flags
+              - link "Agent" [ref=f13e141] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/agent
+              - link "AI Gateway" [ref=f13e150] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/ai-gateway
+              - link "Sandboxes" [ref=f13e159] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/sandboxes
+              - link "Workflows" [ref=f13e168] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/workflows
+              - link "Images" [ref=f13e174] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/images
+              - link "Daemons" [ref=f13e180] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/daemons
+              - separator [ref=f13e189]
+              - link "Usage" [ref=f13e190] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/usage
+              - link "Support" [ref=f13e196] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/support
+              - link "Settings" [ref=f13e202] [cursor=pointer]:
+                - /url: /nandarjr660s-projects/wheel/settings
+          - button "Avatar for nandarjr660 nandarjr660" [ref=f13e216] [cursor=pointer]:
+            - img "Avatar for nandarjr660" [ref=f13e217]:
+              - img "Avatar for nandarjr660" [ref=f13e218]
+            - generic [ref=f13e219]: nandarjr660
+        - button [ref=f13e229] [cursor=pointer]
+      - generic [ref=f13e233]:
+        - generic [ref=f13e234]:
+          - generic [ref=f13e237]:
+            - link "wheel" [ref=f13e238] [cursor=pointer]:
+              - /url: /nandarjr660s-projects/wheel
+            - button [ref=f13e242] [cursor=pointer]
+            - link "Back to team view" [ref=f13e248] [cursor=pointer]:
+              - /url: /nandarjr660s-projects/~/analytics
+          - navigation "Breadcrumb" [ref=f13e252]:
+            - generic [ref=f13e253]: Analytics
+        - generic [ref=f13e260]:
+          - generic [ref=f13e263]:
+            - generic [ref=f13e265]:
+              - link [ref=f13e266] [cursor=pointer]:
+                - /url: https://spinclass.mauppg.biz.id
+                - paragraph [ref=f13e270]: spinclass.mauppg.biz.id
+              - generic [ref=f13e273]:
+                - generic [ref=f13e274] [cursor=pointer]: "+1"
+                - generic [ref=f13e280]:
+                  - generic [ref=f13e281]: "0"
+                  - text: online
+            - generic [ref=f13e283]:
+              - combobox [ref=f13e284]:
+                - generic [ref=f13e285]:
+                  - searchbox [ref=f13e286]: All environments
+                  - button "Open menu" [ref=f13e287] [cursor=pointer]
+              - generic [ref=f13e290]:
+                - button "Oct 14, 12.00 - Oct 21, 12.59" [ref=f13e293] [cursor=pointer]
+                - generic [ref=f13e297]:
+                  - generic [ref=f13e298]: Combobox Menu
+                  - combobox "Combobox Menu" [expanded] [ref=f13e300]: Last 7 Days
+              - button "Analytics actions" [ref=f13e302] [cursor=pointer]
+          - generic [ref=f13e310]:
+            - generic [ref=f13e311]:
+              - generic [ref=f13e312]:
+                - heading "Get Started" [level=2] [ref=f13e313]
+                - paragraph [ref=f13e314]: To start counting visitors and page views, follow these steps.
+              - combobox [ref=f13e318] [cursor=pointer]:
+                - option "Next.js" [selected]
+                - option "Remix"
+                - option "React"
+                - option "Sveltekit"
+                - option "Nuxt"
+                - option "Astro"
+                - option "Vue.js"
+                - option "Other"
+            - generic [ref=f13e319]:
+              - generic [ref=f13e320]:
+                - generic [ref=f13e322]:
+                  - paragraph [ref=f13e324]: "1"
+                  - paragraph [ref=f13e325]: Install our package
+                - generic [ref=f13e327]:
+                  - text: Start by installing @vercel/analytics in your existing project.
+                  - generic [ref=f13e328]:
+                    - generic [ref=f13e329]:
+                      - tablist [ref=f13e330]:
+                        - tab "npm" [selected] [ref=f13e331] [cursor=pointer]
+                        - tab "yarn" [ref=f13e332] [cursor=pointer]
+                        - tab "pnpm" [ref=f13e333] [cursor=pointer]
+                      - button "Copy to clipboard" [ref=f13e334] [cursor=pointer]
+                    - code [ref=f13e345]:
+                      - generic [ref=f13e346]: npm i @vercel/analytics
+              - generic [ref=f13e349]:
+                - generic [ref=f13e351]:
+                  - paragraph [ref=f13e353]: "2"
+                  - generic [ref=f13e354]: Add the React component
+                - generic [ref=f13e356]:
+                  - text: Import and use the
+                  - code [ref=f13e357]: <Analytics/>
+                  - text: React component into your app's layout.
+                  - generic [ref=f13e358]:
+                    - button "Copy to clipboard" [ref=f13e359] [cursor=pointer]
+                    - code [ref=f13e370]:
+                      - generic [ref=f13e371]: "import { Analytics } from \"@vercel/analytics/next\""
+                  - generic [ref=f13e373]:
+                    - text: For full examples and further reference, please refer to our
+                    - link "documentation" [ref=f13e374] [cursor=pointer]:
+                      - /url: /docs/analytics/quickstart?framework=nextjs#add-the-analytics-component-to-your-app
+              - generic [ref=f13e378]:
+                - generic [ref=f13e380]:
+                  - paragraph [ref=f13e382]: "3"
+                  - paragraph [ref=f13e383]: Deploy & Visit your Site
+                - generic [ref=f13e385]:
+                  - paragraph [ref=f13e386]: Deploy your changes and visit the deployment to collect your page views.
+                  - paragraph [ref=f13e387]: If you don't see data after 30 seconds, please check for content blockers and try to navigate between pages on your site.
+            - generic [ref=f13e388]:
+              - generic [ref=f13e389]: Or, install automatically with Vercel Agent (free).
+              - generic [ref=f13e390]:
+                - generic [ref=f13e392]:
+                  - button "Implement with Vercel Agent" [ref=f13e393] [cursor=pointer]
+                  - generic [ref=f13e398]:
+                    - text: Automatically generate a pull request with
+                    - strong [ref=f13e399]: Web Analytics
+                    - text: configured for your project — at no charge.
+                - generic [ref=f13e401]:
+                  - generic [ref=f13e413]: Vercel Agent
+                  - generic [ref=f13e415]: Beta
+          - generic [ref=f13e421]:
+            - generic [ref=f13e422]:
+              - generic [ref=f13e425]:
+                - button "Visitors 0" [ref=f13e426] [cursor=pointer]:
+                  - generic [ref=f13e427]:
+                    - paragraph [ref=f13e429]: Visitors
+                    - paragraph [ref=f13e431]:
+                      - generic [ref=f13e432]: "0"
+                - button "Page Views 0" [ref=f13e434] [cursor=pointer]:
+                  - generic [ref=f13e435]:
+                    - paragraph [ref=f13e437]: Page Views
+                    - paragraph [ref=f13e439]:
+                      - generic [ref=f13e440]: "0"
+                - button "Bounce Rate 0 % 0%" [ref=f13e442] [cursor=pointer]:
+                  - generic [ref=f13e443]:
+                    - paragraph [ref=f13e445]: Bounce Rate
+                    - generic [ref=f13e446]:
+                      - paragraph [ref=f13e447]:
+                        - generic [ref=f13e448]: "0"
+                        - text: "%"
+                      - paragraph [ref=f13e452]: 0%
+              - img [ref=f13e457]:
+                - generic [ref=f13e460]:
+                  - img [ref=f13e462]:
+                    - generic [ref=f13e463]: "0"
+                  - img [ref=f13e465]:
+                    - generic [ref=f13e466]: "50"
+                  - img [ref=f13e468]:
+                    - generic [ref=f13e469]: "100"
+            - generic [ref=f13e470]:
+              - generic [ref=f13e471]:
+                - generic [ref=f13e472]:
+                  - generic [ref=f13e474]:
+                    - tablist [ref=f13e475]:
+                      - tab "Pages" [selected] [ref=f13e476] [cursor=pointer]
+                      - tab "Routes" [ref=f13e477] [cursor=pointer]
+                      - tab "Hostnames" [ref=f13e478] [cursor=pointer]
+                    - generic [ref=f13e479]: Visitors
+                  - generic [ref=f13e482]: No data found for selected period.
+                - generic [ref=f13e488]:
+                  - generic [ref=f13e490]:
+                    - tablist [ref=f13e491]:
+                      - tab "Referrers" [selected] [ref=f13e492] [cursor=pointer]
+                      - tab "UTM Parameters" [ref=f13e493] [cursor=pointer]
+                    - generic [ref=f13e494]: Visitors
+                  - generic [ref=f13e497]: No data found for selected period.
+              - generic [ref=f13e502]:
+                - generic [ref=f13e503]:
+                  - generic [ref=f13e505]:
+                    - tablist [ref=f13e506]:
+                      - tab "Countries" [selected] [ref=f13e507] [cursor=pointer]
+                    - generic [ref=f13e508]: Visitors
+                  - generic [ref=f13e511]: No data found for selected period.
+                - generic [ref=f13e516]:
+                  - generic [ref=f13e518]:
+                    - tablist [ref=f13e519]:
+                      - tab "Devices" [selected] [ref=f13e520] [cursor=pointer]
+                      - tab "Browsers" [ref=f13e521] [cursor=pointer]
+                    - generic [ref=f13e522]: Visitors
+                  - generic [ref=f13e525]: No data found for selected period.
+                - generic [ref=f13e530]:
+                  - generic [ref=f13e532]:
+                    - tablist [ref=f13e533]:
+                      - tab "Operating Systems" [selected] [ref=f13e534] [cursor=pointer]
+                    - generic [ref=f13e535]: Visitors
+                  - generic [ref=f13e538]: No data found for selected period.
+              - generic [ref=f13e543]:
+                - generic [ref=f13e544]:
+                  - generic [ref=f13e546]:
+                    - tablist [ref=f13e547]:
+                      - tab "Events" [selected] [ref=f13e548] [cursor=pointer]
+                    - generic [ref=f13e549]:
+                      - generic [ref=f13e550]: Visitors
+                      - generic [ref=f13e552]: Total
+                  - generic [ref=f13e556]:
+                    - heading "No custom events" [level=4] [ref=f13e560]
+                    - generic [ref=f13e561]:
+                      - generic [ref=f13e562]: Set up custom events to gain a deeper understanding of user behavior on your site.
+                      - generic [ref=f13e564]:
+                        - text: Upgrade to a Pro team to access this feature.
+                        - link "Learn more" [ref=f13e565] [cursor=pointer]:
+                          - /url: /docs/analytics/custom-events
+                      - button "Upgrade to Pro" [ref=f13e571] [cursor=pointer]
+                - generic [ref=f13e574]:
+                  - generic [ref=f13e576]:
+                    - tablist [ref=f13e577]:
+                      - tab "Flags" [selected] [ref=f13e578] [cursor=pointer]
+                    - generic [ref=f13e579]:
+                      - generic [ref=f13e580]: Visitors
+                      - generic [ref=f13e582]: Total
+                  - generic [ref=f13e586]:
+                    - heading "No flags" [level=4] [ref=f13e590]
+                    - generic [ref=f13e591]:
+                      - generic [ref=f13e592]: Gain insights into how active feature flags impact user behavior.
+                      - generic [ref=f13e594]:
+                        - text: Get started by setting up flag tracking.
+                        - link "Learn more" [ref=f13e595] [cursor=pointer]:
+                          - /url: /docs/flags/observability/web-analytics
+  - alert [ref=f13e598]
+  - img:
+    - generic [ref=f13e599]: "21"
